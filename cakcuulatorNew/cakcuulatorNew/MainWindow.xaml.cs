@@ -23,7 +23,7 @@ namespace cakcuulatorNew
     {
        
 
-        private List<string> _history;
+        //private List<string> _history;
         public MainWindow()
         {
             InitializeComponent();
@@ -189,7 +189,7 @@ namespace cakcuulatorNew
 
             else if (TextBox1.Text == "")
             {
-                string messageBoxText = "Числа а не введено!";
+                string messageBoxText = "Число а не введено!";
                 string caption = "Word Processor";
                 MessageBoxButton button = MessageBoxButton.YesNoCancel;
                 MessageBoxImage icon = MessageBoxImage.Warning;
@@ -199,7 +199,7 @@ namespace cakcuulatorNew
             }
             else if (TextBox2.Text == "")
             {
-                string messageBoxText = "Числа b не введено!";
+                string messageBoxText = "Число b не введено!";
                 string caption = "Word Processor";
                 MessageBoxButton button = MessageBoxButton.YesNoCancel;
                 MessageBoxImage icon = MessageBoxImage.Warning;
@@ -218,36 +218,6 @@ namespace cakcuulatorNew
             }
         }
 
-        
-
-        private void TextBox1_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            TextBox tbne = sender as TextBox;
-            if ((!Char.IsDigit(e.Text, 0)) && (e.Text != ","))
-            {
-                { e.Handled = true; }
-            }
-            else
-                if ((e.Text == ",") && ((tbne.Text.IndexOf(",") != -1) || (tbne.Text == "")))
-            { e.Handled = true; }
-        }
-
-        private void TextBox2_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            TextBox tbne = sender as TextBox;
-            if ((!Char.IsDigit(e.Text, 0)) && (e.Text != ","))
-            {
-                { e.Handled = true; }
-            }
-            else
-                if ((e.Text == ",") && ((tbne.Text.IndexOf(",") != -1) || (tbne.Text == "")))
-            { e.Handled = true; }
-        }
-
-        
-
-        
-
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             
@@ -263,5 +233,90 @@ namespace cakcuulatorNew
 
 
         }
+
+        private void TextBox1_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsNumber(e.Text, e.Text.Length - 1))
+            {
+                e.Handled = true;
+            }
+
+            if (((e.Text).ToCharArray()[e.Text.Length - 1] == '.') || ((e.Text).ToCharArray()[e.Text.Length - 1] == ','))
+            {
+                e.Handled = true;
+                if (!((TextBox)sender).Text.Contains(','))
+                {
+                    if (((TextBox)sender).Text.Length == 0)
+                    {
+                        ((TextBox)sender).Text = "0,";
+                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
+                    }
+                    else
+                    {
+                        ((TextBox)sender).Text += ",";
+                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
+                    }
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+
+            if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' & !((TextBox)sender).Text.Contains('-'))
+            {
+                e.Handled = true;
+                ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
+                ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
+            }
+            
+
+
+
+
+        }
+
+        private void TextBox2_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsNumber(e.Text, e.Text.Length - 1))
+            {
+                e.Handled = true;
+            }
+
+            if (((e.Text).ToCharArray()[e.Text.Length - 1] == '.') || ((e.Text).ToCharArray()[e.Text.Length - 1] == ','))
+            {
+                e.Handled = true;
+                if (!((TextBox)sender).Text.Contains(','))
+                {
+                    if (((TextBox)sender).Text.Length == 0)
+                    {
+                        ((TextBox)sender).Text = "0,";
+                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
+                    }
+                    else
+                    {
+                        ((TextBox)sender).Text += ",";
+                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
+                    }
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+
+            if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' && !((TextBox)sender).Text.Contains('-'))
+            {
+                e.Handled = true;
+                ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
+                ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
+            }
+            
+        }
+
+
+       
+
+       
     }
 }
