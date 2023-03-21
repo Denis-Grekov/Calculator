@@ -336,21 +336,7 @@ namespace cakcuulatorNew
             return double.TryParse(str, out i) && i >= -999999999999999999 && i <= 9999999999999999999;
         }
 
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            
-        }
-
-        private void TextBox1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           
-        }
-
-        public void OnPasteCommand(object sender, ExecutedRoutedEventArgs e)
-        {
-            
-
-        }
+        
         private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Copy || e.Command == ApplicationCommands.Cut || e.Command == ApplicationCommands.Paste)
