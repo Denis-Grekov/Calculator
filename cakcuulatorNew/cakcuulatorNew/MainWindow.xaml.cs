@@ -266,6 +266,12 @@ namespace cakcuulatorNew
                 {
                     e.Handled = true;
                 }
+
+
+
+
+
+                
             }
 
             if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' & !((TextBox)sender).Text.Contains('-'))
@@ -274,12 +280,15 @@ namespace cakcuulatorNew
                 ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
                 ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
             }
-            
 
 
 
 
+            e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
         }
+
+        
+
 
         private void TextBox2_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
@@ -316,11 +325,17 @@ namespace cakcuulatorNew
                 ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
                 ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
             }
-            
+
+
+            e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
         }
 
+        public static bool IsValid(string str)
+        {
+            double i;
+            return double.TryParse(str, out i) && i >= -999999999999999999 && i <= 9999999999999999999;
+        }
 
-        
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             
@@ -341,6 +356,27 @@ namespace cakcuulatorNew
             if (e.Command == ApplicationCommands.Copy || e.Command == ApplicationCommands.Cut || e.Command == ApplicationCommands.Paste)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void buttinSave_Click(object sender, RoutedEventArgs e)
+        {
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter("D:\\history.txt"))
+            {
+                for (int i = 0; i < _history1.Items.Count; i++)
+                    sw.WriteLine(_history1.Items[i].ToString());
+            }
+        }
+
+        private void buttonLoad_Click(object sender, RoutedEventArgs e)
+        {
+            _history1.Items.Clear();
+            using (System.IO.StreamReader sr = new System.IO.StreamReader("D:\\history.txt"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    _history1.Items.Add(sr.ReadLine());
+                }
             }
         }
     }
