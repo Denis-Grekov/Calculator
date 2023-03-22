@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -333,7 +334,7 @@ namespace cakcuulatorNew
         public static bool IsValid(string str)
         {
             double i;
-            return double.TryParse(str, out i) && i >= -999999999999999999 && i <= 9999999999999999999;
+            return double.TryParse(str, out i) && i >= double.MinValue && i <= double.MaxValue;
         }
 
         
@@ -345,26 +346,49 @@ namespace cakcuulatorNew
             }
         }
 
-        private void buttinSave_Click(object sender, RoutedEventArgs e)
+        private async void buttinSave_Click(object sender, RoutedEventArgs e)
         {
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter("D:\\history.txt"))
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "TXT|*.txt" };
+            openFileDialog.ShowDialog();
+
+            
+            
+                
+
+
+            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(openFileDialog.FileName))
             {
                 for (int i = 0; i < _history1.Items.Count; i++)
-                    sw.WriteLine(_history1.Items[i].ToString());
+                    await writer.WriteLineAsync(_history1.Items[i].ToString());
             }
+            
         }
 
-        private void buttonLoad_Click(object sender, RoutedEventArgs e)
+        private async void buttonLoad_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "TXT|*.txt" };
+            openFileDialog.ShowDialog();
+
+
             _history1.Items.Clear();
-            using (System.IO.StreamReader sr = new System.IO.StreamReader("D:\\history.txt"))
+
+            
+
+            string path = openFileDialog.FileName;
+
+            
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
             {
-                while (!sr.EndOfStream)
+                string ? line;
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
-                    _history1.Items.Add(sr.ReadLine());
+                    _history1.Items.Add(line);
                 }
             }
+
         }
+
+        
     }
 
 }
