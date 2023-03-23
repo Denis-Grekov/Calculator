@@ -348,18 +348,30 @@ namespace cakcuulatorNew
 
         private async void buttinSave_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "TXT|*.txt" };
-            openFileDialog.ShowDialog();
-
-            
-            
-                
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "TXT|*.txt" };
+            saveFileDialog.ShowDialog();
 
 
-            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(openFileDialog.FileName))
+
+            if (string.IsNullOrEmpty(saveFileDialog.FileName))
             {
-                for (int i = 0; i < _history1.Items.Count; i++)
-                    await writer.WriteLineAsync(_history1.Items[i].ToString());
+                string messageBoxText = "Выберите файл!";
+                string caption = "Word Processor";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            }
+            else
+
+            {
+
+
+                using (System.IO.StreamWriter writer = new System.IO.StreamWriter(saveFileDialog.FileName))
+                {
+                    for (int i = 0; i < _history1.Items.Count; i++)
+                        await writer.WriteLineAsync(_history1.Items[i].ToString());
+                }
             }
             
         }
@@ -376,13 +388,25 @@ namespace cakcuulatorNew
 
             string path = openFileDialog.FileName;
 
-            
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
+            if (string.IsNullOrEmpty(path))
             {
-                string ? line;
-                while ((line = await reader.ReadLineAsync()) != null)
+                string messageBoxText = "Выберите файл!";
+                string caption = "Word Processor";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            }
+            else
+            {
+
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
                 {
-                    _history1.Items.Add(line);
+                    string? line;
+                    while ((line = await reader.ReadLineAsync()) != null)
+                    {
+                        _history1.Items.Add(line);
+                    }
                 }
             }
 
