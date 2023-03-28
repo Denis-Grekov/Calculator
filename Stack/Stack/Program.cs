@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Stack
 {
@@ -15,7 +16,7 @@ namespace Stack
 
 
             
-            Stack<int> s = new Stack<int>(5);
+            Stack<int> s = new Stack<int>();
             
             s.Push(1);
             s.Push(2);
@@ -48,7 +49,10 @@ namespace Stack
             s.Clear();
             Console.WriteLine("Очистили стек: ");
             foreach (var a in s) Console.WriteLine(a);
-
+            s.Push(5);
+            s.Push(4);
+            Console.WriteLine("Добавили 5 и 4 в стек: ");
+            foreach (var a in s) Console.WriteLine(a);
             Console.ReadKey();
         }
     }
@@ -84,13 +88,7 @@ namespace Stack
                 return this._Size;
             }
         }
-        public int Count
-        {
-            get
-            {
-                return this._Top;
-            }
-        }
+        
         public bool IsFull()
         {
             return this._Top == this._Size;
@@ -121,26 +119,36 @@ namespace Stack
 
         public bool Contains(int arg)
         {
-            if (this._Array[++this._Top] == arg)
+            for (int i = _Top - 1; i >= 0; i--)
             {
-                return true;
-            }else
-            {
-                return false;
+                if (_Array[i] == arg)
+                {
+                    return true;
+                }
             }
+
+            return false;
+
+
         }
 
         public void Clear()   
         {
-             _Array = null;
-             _Size = 0;
-            
+            for (int i = 0; i < _Size; i++)
+            {
+                _Array[i] = 0;
+            }
+
+            _Top = 0;
+
         }
+       
+        
 
     }
+
     
-    
-    
-    
+   
+
 
 }
