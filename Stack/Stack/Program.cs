@@ -12,54 +12,80 @@ namespace Stack
     {
         static void Main(string[] args)
         {
-            
 
 
-            
-            Stack<int> s = new Stack<int>();
-            
+
+
+            /*Stack<int> s = new Stack<int>();
             s.Push(1);
             s.Push(2);
             s.Push(3);
+            s.Push(4);
+            s.Push(5);
 
             Console.WriteLine("Стек: ");
             foreach (var a in s) Console.WriteLine(a);
 
-            Console.WriteLine("Всего элементов в стеке: ");
+            Console.WriteLine("Всего чисел: ");
             Console.WriteLine(s.Count.ToString());
-            Console.WriteLine("Крайнее число стека: " + s.Pop());
-            
-            Console.WriteLine("Крайнее число после pop: " + s.Peek());
-            
-            Console.WriteLine();
-            Console.WriteLine("Добавили числа: ");
-            s.Push(4);
-            s.Push(5);
-            Console.WriteLine("Всего чисел после push: " + s.Count.ToString());
-            Console.WriteLine();
-            Console.WriteLine("Всего элементов в стеке: ");
-            Console.WriteLine(s.Count);
+            Console.WriteLine("Последнее число в стеке: " + s.Pop());
 
-            Console.WriteLine("Отредактированный стек: ");
+            Console.WriteLine("Top after pop: " + s.Peek());
+
+            Console.WriteLine();
+            Console.WriteLine("Добавили числа в стек: ");
+            s.Push(6);
+            s.Push(7);
+            Console.WriteLine("Всего чисел: " + s.Count.ToString());
+            Console.WriteLine();
+           
+
+            Console.WriteLine("Измененный стек: ");
             foreach (var a in s) Console.WriteLine(a);
-            Console.WriteLine("Есть ли в стеке 9? " + s.Contains(9));
-            Console.WriteLine("Есть ли в стеке 2? " + s.Contains(2));
-            
+            Console.WriteLine("9 в стеке? " + s.Contains(9));
+            Console.WriteLine("2 в стеке? " + s.Contains(2));
 
             s.Clear();
-            Console.WriteLine("Очистили стек: ");
+            Console.WriteLine("Cleared stack: ");
             foreach (var a in s) Console.WriteLine(a);
             s.Push(5);
             s.Push(4);
-            Console.WriteLine("Добавили 5 и 4 в стек: ");
+            Console.WriteLine("Добавили 5 и 4: ");
             foreach (var a in s) Console.WriteLine(a);
+            Console.ReadKey();*/
+
+            Stack1<int> myStack = new Stack1<int>();
+
+            
+            myStack.Push(1);
+            myStack.Push(2);
+            myStack.Push(3);
+
+            
+            int topElement = myStack.Pop();
+            Console.WriteLine("Верхний элемент: " + topElement);
+
+            
+            topElement = myStack.Peek();
+            Console.WriteLine("Верхний элемент после pop: " + topElement);
+
+            
+            bool containsElement = myStack.Contains(2);
+            Console.WriteLine("Есть ли 2? " + containsElement);
+
+            
+            myStack.Clear();
+
+            bool isEmpty = myStack.IsEmpty();
+            Console.WriteLine("Стек пустой? " + isEmpty);
+
             Console.ReadKey();
         }
     }
 
     
 
-    public class Stack
+    /*public class Stack
     {
         private int _Size;
         private int[] _Array;
@@ -145,10 +171,75 @@ namespace Stack
        
         
 
+    }*/
+
+    public class Node<T>
+    {
+        public T Data { get; set; }
+        public Node<T> Next { get; set; }
+
+        public Node(T data)
+        {
+            Data = data;
+            Next = null;
+        }
     }
 
-    
-   
+    public class Stack1<T>
+    {
+        private Node<T> _top;
+
+        public Stack1()
+        {
+            _top = null;
+        }
+
+        public bool IsEmpty()
+        {
+            return _top == null;
+        }
+
+        public void Push(T element)
+        {
+            Node<T> node = new Node<T>(element);
+            node.Next = _top;
+            _top = node;
+        }
+
+        public T Pop()
+        {
+            if (IsEmpty())
+                throw new Exception("Stack is empty");
+            T data = _top.Data;
+            _top = _top.Next;
+            return data;
+        }
+
+        public T Peek()
+        {
+            if (IsEmpty())
+                throw new Exception("Stack is empty");
+            return _top.Data;
+        }
+
+        public bool Contains(T element)
+        {
+            Node<T> current = _top;
+            while (current != null)
+            {
+                if (current.Data.Equals(element))
+                    return true;
+                current = current.Next;
+            }
+            return false;
+        }
+
+        public void Clear()
+        {
+            _top = null;
+        }
+    }
+
 
 
 }
