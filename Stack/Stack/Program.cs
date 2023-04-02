@@ -58,7 +58,7 @@ namespace Stack
         }
     }
 
-    public class Stack1<T>
+    public class Stack1<T> : IEnumerable<T>
     {
         private Node<T> _top;
 
@@ -110,6 +110,46 @@ namespace Stack
         public void Clear()
         {
             _top = null;
+        }
+
+
+
+        public bool Equals(Stack1<T> other)
+        {
+
+            Node<T> currentTop = _top;
+            while (currentTop != null)
+            {
+                Node<T> otherTop = other._top;
+
+                if (otherTop == null)
+                {
+                    return false;
+                }
+
+                T currentValue = currentTop.Data;
+                T otherValue = otherTop.Data;
+
+                if (!currentValue.Equals(otherValue))
+                {
+                    return false;
+                }
+
+                currentTop = currentTop.Next;
+                otherTop = currentTop.Next;
+            }
+
+            return true;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 
