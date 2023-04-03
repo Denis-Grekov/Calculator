@@ -113,43 +113,19 @@ namespace Stack
         }
 
 
-
-        public bool Equals(Stack1<T> other)
-        {
-
-            Node<T> currentTop = _top;
-            while (currentTop != null)
-            {
-                Node<T> otherTop = other._top;
-
-                if (otherTop == null)
-                {
-                    return false;
-                }
-
-                T currentValue = currentTop.Data;
-                T otherValue = otherTop.Data;
-
-                if (!currentValue.Equals(otherValue))
-                {
-                    return false;
-                }
-
-                currentTop = currentTop.Next;
-                otherTop = currentTop.Next;
-            }
-
-            return true;
-        }
-
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            Node<T> current = _top;
+            while (current != null)
+            {
+                yield return current.Data;
+                current = current.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 
