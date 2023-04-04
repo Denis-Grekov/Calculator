@@ -376,15 +376,15 @@ namespace cakcuulatorNew
             
         }
 
+
+
+
         private async void buttonLoad_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "TXT|*.txt" };
             openFileDialog.ShowDialog();
 
-
             _history1.Items.Clear();
-
-            
 
             string path = openFileDialog.FileName;
 
@@ -399,20 +399,46 @@ namespace cakcuulatorNew
             }
             else
             {
-
+                bool hasForeignCharacters = false;
                 using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
                 {
                     string? line;
                     while ((line = await reader.ReadLineAsync()) != null)
                     {
-                        _history1.Items.Add(line);
+                        if (ValidateString(line))
+                        {
+                            _history1.Items.Add(line);
+                        }
+                        else
+                        {
+                            hasForeignCharacters = true;
+                        }
                     }
                 }
-            }
 
+                if (hasForeignCharacters)
+                {
+                    string messageBoxText = "Файл содержит сторонние символы!";
+                    string caption = "Word Processor";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBoxResult result;
+                    result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                }
+            }
         }
 
-        
+
+
+        private bool ValidateString(string input)
+        {
+            bool startsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d");
+            bool endsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"\d$");
+
+            return startsWithNumber && endsWithNumber;
+        }
+
+
     }
 
 }
