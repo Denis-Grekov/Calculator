@@ -156,9 +156,11 @@ namespace company
 
         public void RemoveEmployee()
         {
-            var minSalary = employees.Min(e => e.Salary);
-            var employeeToRemove = employees.First(e => e.Salary == minSalary);
+            var employeeToRemove = employees.OrderBy(e => e.Salary).First();
             employees.Remove(employeeToRemove);
+            Console.WriteLine("Удаленный сотрудник:");
+            Console.WriteLine(employeeToRemove.Name);
+            
         }
 
         public void Hello()
