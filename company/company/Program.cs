@@ -16,6 +16,11 @@ namespace company
             Company company = new Company();
             company.GenerateEmployees(10);
             company.PrintEmployees();
+
+            
+
+           
+
             Console.WriteLine("Что сделать? 1 - показать определенных сотрудников; 2 - Удалить сотрудника с наименьшей зарплатой; 3 - поздароваться");
 
             toDo = Convert.ToInt32(Console.ReadLine());
@@ -42,12 +47,18 @@ namespace company
                     company.PrintEmployees();
                     break;
                 case 3:
-                    company.Hello();
+                    
+                    company.GreetDirectors();
+                    company.GreetSeniorEmployees();
+                    company.GreetJuniorEmployees();
+                    //company.Hello();
                     break;
                 default:
                     Console.WriteLine("Выберите из перечисленных!");
                     break;
             }
+
+
             
             Console.ReadKey();
         }
@@ -74,7 +85,7 @@ namespace company
 
 
 
-        public void Hello()
+        public virtual void Hello()
         {
             switch (Post)
             {
@@ -90,6 +101,34 @@ namespace company
             }
         }
     }
+
+    class Director : Employee
+    {
+        public override void Hello()
+        {
+            Employee employee = new Employee();
+            employee.Hello();
+        }
+    }
+
+    class SeniorEmployee : Employee
+    {
+        public override void Hello()
+        {
+            Employee employee = new Employee();
+            employee.Hello();
+        }
+    }
+
+    class JuniorEmployee : Employee
+    {
+        public override void Hello()
+        {
+            Employee employee = new Employee();
+            employee.Hello();
+        }
+    }
+
 
     public class Company
     {
@@ -163,26 +202,56 @@ namespace company
             
         }
 
-        public void Hello()
+        
+        public void GreetDirectors()
         {
-            List<Employee> directors = employees.Where(e => e.Post == PostEnum.Director).ToList();
-            List<Employee> seniorEmployees = employees.Where(e => e.Post == PostEnum.SeniorEmployee).ToList();
-            List<Employee> juniorEmployees = employees.Where(e => e.Post == PostEnum.JuniorEmployee).ToList();
-
+            var directors = employees.Where(e => e.Post == PostEnum.Director).ToList();
             
-            Random random = new Random();
-            Employee randomDirector = directors[random.Next(directors.Count)];
-            Console.WriteLine("Директор: ");
-            randomDirector.Hello();
-
-            Employee randomSeniorEmployee = seniorEmployees[random.Next(seniorEmployees.Count)];
-            Console.WriteLine("Старший сотрудник: ");
-            randomSeniorEmployee.Hello();
-
-            Employee randomJuniorEmployee = juniorEmployees[random.Next(juniorEmployees.Count)];
-            Console.WriteLine("Младший сотрудник: ");
-            randomJuniorEmployee.Hello();
+            
+            var random = new Random();
+            var index = random.Next(0, directors.Count);
+            directors[index].Hello();
+            
+            
         }
+
+        public void GreetSeniorEmployees()
+        {
+            var seniorEmployees = employees.Where(e => e.Post == PostEnum.SeniorEmployee).ToList();
+
+            if (seniorEmployees.Count > 0)
+            {
+                var random = new Random();
+                var index = random.Next(0, seniorEmployees.Count);
+                seniorEmployees[index].Hello();
+            }
+            else
+            {
+                Console.WriteLine("Старшие сотрудники не найдены.");
+            }
+        }
+
+
+        public void GreetJuniorEmployees()
+        {
+            var juniorEmployees = employees.Where(e => e.Post == PostEnum.JuniorEmployee).ToList();
+
+            if (juniorEmployees.Count > 0)
+            {
+                var random = new Random();
+                var index = random.Next(0, juniorEmployees.Count);
+                juniorEmployees[index].Hello();
+            }
+            else
+            {
+                Console.WriteLine("Младшие сотрудники не найдены.");
+            }
+        }
+
+
+
+
+
     }
 
     
