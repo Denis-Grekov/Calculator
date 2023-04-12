@@ -16,10 +16,12 @@ namespace company
             Company company = new Company();
             company.GenerateEmployees(10);
             company.PrintEmployees();
+            Employee employee = new Employee();
 
-            
+            Director director = new Director();
+            SeniorEmployee seniorEmployee = new SeniorEmployee();
+            JuniorEmployee juniorEmployee = new JuniorEmployee();
 
-           
 
             Console.WriteLine("Что сделать? 1 - показать определенных сотрудников; 2 - Удалить сотрудника с наименьшей зарплатой; 3 - поздароваться");
 
@@ -47,19 +49,15 @@ namespace company
                     company.PrintEmployees();
                     break;
                 case 3:
-                    
-                    company.GreetDirectors();
+                    company.GreetDirector();
                     company.GreetSeniorEmployees();
                     company.GreetJuniorEmployees();
-                    //company.Hello();
                     break;
                 default:
                     Console.WriteLine("Выберите из перечисленных!");
                     break;
             }
 
-
-            
             Console.ReadKey();
         }
 
@@ -67,7 +65,6 @@ namespace company
 
     }
 
-    
     enum PostEnum
     {
         Director = 1,
@@ -83,49 +80,49 @@ namespace company
         public string CompanyName { get; set; }
         public PostEnum Post { get; set; } // 1 - Директор, 2 - Старший сотрудник, 3 - Младший сотрудник
 
-
-
-        public virtual void Hello()
-        {
-            switch (Post)
-            {
-                case PostEnum.Director:
-                    Console.WriteLine($"Здравствуйте, меня зовут {Name}, надеюсь на наше дальнейшее сотрудничество!");
-                    break;
-                case PostEnum.SeniorEmployee:
-                    Console.WriteLine($"Привет, я {Name}, будем знакомы.");
-                    break;
-                case PostEnum.JuniorEmployee:
-                    Console.WriteLine($"Ку, я {Name}, теперь мы в одной лодке :)");
-                    break;
-            }
-        }
+        
     }
 
     class Director : Employee
     {
-        public override void Hello()
+        
+        public Director()
         {
-            Employee employee = new Employee();
-            employee.Hello();
+            Post = PostEnum.Director;
+        }
+
+        public void Hello(string Name)
+        {
+            
+            Console.WriteLine($"Здравствуйте, меня зовут {Name}, надеюсь на наше дальнейшее сотрудничество!");
         }
     }
 
     class SeniorEmployee : Employee
     {
-        public override void Hello()
+        public SeniorEmployee()
         {
-            Employee employee = new Employee();
-            employee.Hello();
+            Post = PostEnum.Director;
         }
+
+        public void Hello(string Name)
+        {
+
+            Console.WriteLine($"Привет, я {Name}, будем знакомы.");
+        }
+
     }
 
     class JuniorEmployee : Employee
     {
-        public override void Hello()
+        public JuniorEmployee()
         {
-            Employee employee = new Employee();
-            employee.Hello();
+            Post = PostEnum.JuniorEmployee;
+        }
+
+        public void Hello(string Name)
+        {
+            Console.WriteLine($"Ку, я {Name}, теперь мы в одной лодке :)");
         }
     }
 
@@ -142,7 +139,7 @@ namespace company
         public void GenerateEmployees(int count)
         {
             var rnd = new Random();
-            employees = new List<Employee>();
+            
 
             var firstNames = new List<string>() { "Иван", "Петр", "Андрей", "Сергей", "Олег" };
             var lastNames = new List<string>() { "Иванов", "Петров", "Сидоров", "Кузнецов", "Соловьев" };
@@ -166,7 +163,7 @@ namespace company
                     Age = rnd.Next(18, 100),
                     CompanyName = companyNames[rnd.Next(companyNames.Count)],
                     Post = (PostEnum)rnd.Next(1, Enum.GetValues(typeof(PostEnum)).Length + 1)
-            };
+                };
                 employees.Add(employee);
             }
         }
@@ -201,61 +198,33 @@ namespace company
             Console.WriteLine(employeeToRemove.Name);
             
         }
-
-        
-        public void GreetDirectors()
-        {
-            var directors = employees.Where(e => e.Post == PostEnum.Director).ToList();
-            
-            
-            var random = new Random();
-            var index = random.Next(0, directors.Count);
-            directors[index].Hello();
-            
-            
-        }
-
-        public void GreetSeniorEmployees()
-        {
-            var seniorEmployees = employees.Where(e => e.Post == PostEnum.SeniorEmployee).ToList();
-
-            if (seniorEmployees.Count > 0)
-            {
-                var random = new Random();
-                var index = random.Next(0, seniorEmployees.Count);
-                seniorEmployees[index].Hello();
-            }
-            else
-            {
-                Console.WriteLine("Старшие сотрудники не найдены.");
-            }
-        }
-
-
         public void GreetJuniorEmployees()
         {
-            var juniorEmployees = employees.Where(e => e.Post == PostEnum.JuniorEmployee).ToList();
+            
+            var employeeName = employees.Where(e => e.Post == PostEnum.JuniorEmployee).First();
+            JuniorEmployee juniorEmployee = new JuniorEmployee();
 
-            if (juniorEmployees.Count > 0)
-            {
-                var random = new Random();
-                var index = random.Next(0, juniorEmployees.Count);
-                juniorEmployees[index].Hello();
-            }
-            else
-            {
-                Console.WriteLine("Младшие сотрудники не найдены.");
-            }
+            juniorEmployee.Hello(employeeName.Name);
+
         }
+        public void GreetDirector()
+        {
 
+            var employeeName = employees.Where(e => e.Post == PostEnum.Director).First();
+            Director director = new Director();
 
+            director.Hello(employeeName.Name);
 
+        }
+        public void GreetSeniorEmployees()
+        {
 
+            var employeeName = employees.Where(e => e.Post == PostEnum.SeniorEmployee).First();
+            SeniorEmployee seniorEmployee = new SeniorEmployee();
 
+            seniorEmployee.Hello(employeeName.Name);
+
+        }
     }
-
-    
-
-    
 }
 
