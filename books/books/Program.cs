@@ -10,23 +10,22 @@ class Program
     static void Main(string[] args)
     {
         Console.Write("Введите количество читателей (N): ");
-        if (int.TryParse(Console.ReadLine(), out numReaders))
+        if (!int.TryParse(Console.ReadLine(), out numReaders))
         {
-            semaphore = new SemaphoreSlim(2); 
+            Console.WriteLine("Некорректное значение. Попробуйте еще раз.");
+            return;
+        }
+        
+            semaphore = new SemaphoreSlim(2);
 
             for (int i = 0; i < numReaders; i++)
             {
-                Reader reader = new Reader(i + 1); 
+                Reader reader = new Reader(i + 1);
                 Thread readerThread = new Thread(reader.ReadBooks); // Создание потоков для работы читателей
-                readerThread.Start(); 
+                readerThread.Start();
             }
 
-            Console.ReadLine(); 
-        }
-        else
-        {
-            Console.WriteLine("Некорректное значение. Попробуйте еще раз.");
-        }
+        Console.ReadLine();
     }
 
     class Reader
@@ -42,11 +41,15 @@ class Program
 
         public void ReadBooks()
         {
-            Console.WriteLine($"Читатель {readerId} пришел в библиотеку.");
+
+            
 
             while (numVisits < 2) 
             {
-                semaphore.Wait(); 
+                Console.WriteLine($"Читатель {readerId} пришел в библиотеку.");
+                semaphore.Wait();
+
+                
 
                 Console.WriteLine($"Читатель {readerId} зашел в библиотеку и начал читать.");
 
@@ -56,6 +59,7 @@ class Program
                 Console.WriteLine($"Читатель {readerId} закончил читать и покинул библиотеку.");
 
                 semaphore.Release(); // Освобождение разрешения на вход в библиотеку
+
 
                 numVisits++; 
 
