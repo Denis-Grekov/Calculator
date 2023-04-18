@@ -16,13 +16,7 @@ namespace company
             Company company = new Company();
             company.GenerateEmployees(10);
             company.PrintEmployees();
-            Employee employee = new Employee("Илья");
-
-            Director director = new Director("Илья");
-            SeniorEmployee seniorEmployee = new SeniorEmployee("Илья");
-            JuniorEmployee juniorEmployee = new JuniorEmployee("Илья");
-
-
+       
             Console.WriteLine("Что сделать? 1 - показать определенных сотрудников; 2 - Удалить сотрудника с наименьшей зарплатой; 3 - поздароваться");
 
             toDo = Convert.ToInt32(Console.ReadLine());
