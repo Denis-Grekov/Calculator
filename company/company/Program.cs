@@ -72,6 +72,7 @@ namespace company
 
     class Director : Employee
     {
+        public List<Director> Directors { get; } = new List<Director>();
         public Director(string name)  : base(name)
         {  
             Post = PostEnum.Director;
@@ -116,6 +117,7 @@ namespace company
         private string seniorName;
         private string juniorName;
 
+        private Director director = new Director("d");
         public Company()
         {
             employees = new List<Employee>();
@@ -130,6 +132,11 @@ namespace company
 
             var usedNames = new List<string>();
 
+            var directorEmployees = new List<Employee>();
+            var seniorEmployees = new List<Employee>();
+            var juniorEmployees = new List<Employee>();
+
+
             for (int i = 0; i < count; i++)
             {
                 string newName;
@@ -139,6 +146,7 @@ namespace company
                 } while (usedNames.Contains(newName));
                 usedNames.Add(newName);
                 PostEnum postEnum = (PostEnum)rnd.Next(1, Enum.GetValues(typeof(PostEnum)).Length + 1);
+
                 var employee = new Employee(newName)
                 {
                     Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
@@ -148,21 +156,34 @@ namespace company
                     Post = postEnum
 
                 };
+
+                var directors = director.Directors;
+
+                switch (postEnum)
+                {
+                    case PostEnum.Director:
+                        
+                        directorName = employee.Name;
+                        directors.Add(director);
+                        break;
+                    case PostEnum.SeniorEmployee:
+                        seniorEmployees.Add(employee);
+                        seniorName = employee.Name;
+                        break;
+                    case PostEnum.JuniorEmployee:
+                        juniorEmployees.Add(employee);
+                        juniorName = employee.Name;
+                        break;
+                    default:
+                        break;
+                }
+
+
                 employees.Add(employee);
 
-                if (employee.Post == PostEnum.Director)
-                {
-                    directorName = employee.Name;
-                }
-                if (employee.Post == PostEnum.SeniorEmployee)
-                {
-                    seniorName = employee.Name;
-                }
-                if (employee.Post == PostEnum.JuniorEmployee)
-                {
-                    juniorName = employee.Name;
-                }
             }
+
+            
         }
         public void PrintEmployees()
         {
@@ -203,8 +224,9 @@ namespace company
         public void GreetDirector()
         {
             Director director = new Director(directorName);
-            director.Hello();
+            director = employees.OfType<Director>().FirstOrDefault();
 
+            director.Hello();
         }
 
         public void GreetSeniorEmployees()
