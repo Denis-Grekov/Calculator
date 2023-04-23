@@ -14,6 +14,7 @@ namespace company
             Company company = new Company();
             company.GenerateEmployees(10);
             company.PrintEmployees();
+            
             Console.WriteLine("Что сделать? 1 - показать определенных сотрудников; 2 - Удалить сотрудника с наименьшей зарплатой; 3 - поздароваться");
             toDo = Convert.ToInt32(Console.ReadLine());
             switch (toDo)
@@ -47,6 +48,7 @@ namespace company
             }
             Console.ReadKey();
         }
+        
     }
 
     enum PostEnum
@@ -113,14 +115,19 @@ namespace company
     public class Company
     {
         private List<Employee> employees;
-        private string directorName;
-        private string seniorName;
-        private string juniorName;
+        private List<Employee> directorEmployees;
+        private List<Employee> seniorEmployees;
+        private List<Employee> juniorEmployees;
+
+
 
         private Director director = new Director("d");
         public Company()
         {
             employees = new List<Employee>();
+            directorEmployees = new List<Employee>();
+            seniorEmployees = new List<Employee>();
+            juniorEmployees = new List<Employee>();
         }
 
         public void GenerateEmployees(int count)
@@ -132,11 +139,6 @@ namespace company
 
             var usedNames = new List<string>();
 
-            var directorEmployees = new List<Employee>();
-            var seniorEmployees = new List<Employee>();
-            var juniorEmployees = new List<Employee>();
-
-
             for (int i = 0; i < count; i++)
             {
                 string newName;
@@ -147,39 +149,76 @@ namespace company
                 usedNames.Add(newName);
                 PostEnum postEnum = (PostEnum)rnd.Next(1, Enum.GetValues(typeof(PostEnum)).Length + 1);
 
-                var employee = new Employee(newName)
-                {
-                    Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
-                    Name = newName,
-                    Age = rnd.Next(18, 100),
-                    CompanyName = companyNames[rnd.Next(companyNames.Count)],
-                    Post = postEnum
+                //var employee = new Employee(newName);
+                //{
+                //    Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
+                //    Name = newName,
+                //    Age = rnd.Next(18, 100),
+                //    CompanyName = companyNames[rnd.Next(companyNames.Count)],
+                //    Post = postEnum
 
-                };
+               // };
 
-                var directors = director.Directors;
+                //var directors = director.Directors;
+                
+                
+                
 
                 switch (postEnum)
                 {
                     case PostEnum.Director:
+
+                        var director = new Director(newName)
+                        {
+                            Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
+                            Name = newName,
+                            Age = rnd.Next(18, 100),
+                            CompanyName = companyNames[rnd.Next(companyNames.Count)],
+                            Post = postEnum
+                        };
                         
-                        directorName = employee.Name;
-                        directors.Add(director);
+
+                        employees.Add(director);
+
+                        directorEmployees.Add(director);
                         break;
                     case PostEnum.SeniorEmployee:
-                        seniorEmployees.Add(employee);
-                        seniorName = employee.Name;
+
+                        var senior = new SeniorEmployee(newName)
+                        {
+                            Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
+                            Name = newName,
+                            Age = rnd.Next(18, 100),
+                            CompanyName = companyNames[rnd.Next(companyNames.Count)],
+                            Post = postEnum
+                        };
+
+                        
+                        employees.Add(senior);
+                        seniorEmployees.Add(senior);
                         break;
                     case PostEnum.JuniorEmployee:
-                        juniorEmployees.Add(employee);
-                        juniorName = employee.Name;
+
+                        var junior = new JuniorEmployee(newName)
+                        {
+                            Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
+                            Name = newName,
+                            Age = rnd.Next(18, 100),
+                            CompanyName = companyNames[rnd.Next(companyNames.Count)],
+                            Post = postEnum
+                        };
+                        
+                        
+                        employees.Add(junior);
+                        juniorEmployees.Add(junior);
+                        
                         break;
                     default:
                         break;
                 }
 
 
-                employees.Add(employee);
+                
 
             }
 
@@ -194,7 +233,9 @@ namespace company
             }
             Console.WriteLine();
         }
+
        
+
         public void PrintEmployeesWithPost(int post)
         {
 
@@ -217,22 +258,20 @@ namespace company
 
         public void GreetJuniorEmployees()
         {
-            JuniorEmployee juniorEmployee = new JuniorEmployee(juniorName); 
-            juniorEmployee.Hello();
+
+            (juniorEmployees.Last() as JuniorEmployee).Hello();
+
         }
 
         public void GreetDirector()
         {
-            Director director = new Director(directorName);
-            director = employees.OfType<Director>().FirstOrDefault();
-
-            director.Hello();
+            
+             (directorEmployees.Last() as Director).Hello();
         }
 
         public void GreetSeniorEmployees()
         {
-            SeniorEmployee seniorEmployee = new SeniorEmployee(seniorName); 
-            seniorEmployee.Hello();
+            (seniorEmployees.Last() as SeniorEmployee).Hello();
         }
     }
 }
