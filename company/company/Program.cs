@@ -48,7 +48,6 @@ namespace company
             }
             Console.ReadKey();
         }
-        
     }
 
     enum PostEnum
@@ -92,7 +91,6 @@ namespace company
         {
             Post = PostEnum.Director;
         }
-
         public override void Hello()
         {
             Console.WriteLine($"Привет, я {Name}, будем знакомы.");
@@ -105,22 +103,17 @@ namespace company
         {
             Post = PostEnum.JuniorEmployee;
         }
-
         public override void Hello()
         {
             Console.WriteLine($"Ку, я {Name}, теперь мы в одной лодке :)");
         }
     }
-
     public class Company
     {
         private List<Employee> employees;
         private List<Employee> directorEmployees;
         private List<Employee> seniorEmployees;
         private List<Employee> juniorEmployees;
-
-
-
         private Director director = new Director("d");
         public Company()
         {
@@ -129,14 +122,12 @@ namespace company
             seniorEmployees = new List<Employee>();
             juniorEmployees = new List<Employee>();
         }
-
         public void GenerateEmployees(int count)
         {
             var rnd = new Random();
             var firstNames = new List<string>() { "Иван", "Петр", "Андрей", "Сергей", "Олег" };
             var lastNames = new List<string>() { "Иванов", "Петров", "Сидоров", "Кузнецов", "Соловьев" };
             var companyNames = new List<string>() { "Кондитерская №1" };
-
             var usedNames = new List<string>();
 
             for (int i = 0; i < count; i++)
@@ -148,21 +139,6 @@ namespace company
                 } while (usedNames.Contains(newName));
                 usedNames.Add(newName);
                 PostEnum postEnum = (PostEnum)rnd.Next(1, Enum.GetValues(typeof(PostEnum)).Length + 1);
-
-                //var employee = new Employee(newName);
-                //{
-                //    Salary = Math.Round(rnd.NextDouble() * 2000 + 1000, 2),
-                //    Name = newName,
-                //    Age = rnd.Next(18, 100),
-                //    CompanyName = companyNames[rnd.Next(companyNames.Count)],
-                //    Post = postEnum
-
-               // };
-
-                //var directors = director.Directors;
-                
-                
-                
 
                 switch (postEnum)
                 {
@@ -176,10 +152,7 @@ namespace company
                             CompanyName = companyNames[rnd.Next(companyNames.Count)],
                             Post = postEnum
                         };
-                        
-
                         employees.Add(director);
-
                         directorEmployees.Add(director);
                         break;
                     case PostEnum.SeniorEmployee:
@@ -192,8 +165,6 @@ namespace company
                             CompanyName = companyNames[rnd.Next(companyNames.Count)],
                             Post = postEnum
                         };
-
-                        
                         employees.Add(senior);
                         seniorEmployees.Add(senior);
                         break;
@@ -207,8 +178,6 @@ namespace company
                             CompanyName = companyNames[rnd.Next(companyNames.Count)],
                             Post = postEnum
                         };
-                        
-                        
                         employees.Add(junior);
                         juniorEmployees.Add(junior);
                         
@@ -216,13 +185,7 @@ namespace company
                     default:
                         break;
                 }
-
-
-                
-
             }
-
-            
         }
         public void PrintEmployees()
         {
@@ -233,8 +196,6 @@ namespace company
             }
             Console.WriteLine();
         }
-
-       
 
         public void PrintEmployeesWithPost(int post)
         {
@@ -258,20 +219,39 @@ namespace company
 
         public void GreetJuniorEmployees()
         {
-
-            (juniorEmployees.Last() as JuniorEmployee).Hello();
-
+            if (juniorEmployees.Count == 0)
+            {
+                Console.WriteLine("Джуниоров нет");
+            }
+            else
+            {
+                (juniorEmployees.Last() as JuniorEmployee).Hello();
+            }
         }
 
         public void GreetDirector()
         {
+            if (directorEmployees.Count == 0)
+            {
+                Console.WriteLine("Директоров нет");
+            }
+            else
+            {
+                (directorEmployees.Last() as Director).Hello();
+            }
             
-             (directorEmployees.Last() as Director).Hello();
         }
 
         public void GreetSeniorEmployees()
         {
-            (seniorEmployees.Last() as SeniorEmployee).Hello();
+            if (seniorEmployees.Count == 0)
+            {
+                Console.WriteLine("Сеньеров нет");
+            }
+            else
+            {
+                (seniorEmployees.Last() as SeniorEmployee).Hello();
+            }
         }
     }
 }
