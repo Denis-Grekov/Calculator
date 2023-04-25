@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,27 +19,22 @@ using System.Windows.Shapes;
 
 namespace cakcuulatorNew
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    /// 
-
-
-
-
+  
     public partial class MainWindow : Window
     {
-       
+        private FooViewModel _viewModel;
 
-        //private List<string> _history;
         public MainWindow()
         {
             InitializeComponent();
+
+            _viewModel = new FooViewModel();
+            DataContext = _viewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            
 
             if (TextBox1.Text == "" && TextBox2.Text == "")
             {
@@ -47,8 +44,6 @@ namespace cakcuulatorNew
                 MessageBoxImage icon = MessageBoxImage.Error;
                 MessageBoxResult result;
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-                
             }
 
             else if (TextBox1.Text == "")
@@ -76,10 +71,9 @@ namespace cakcuulatorNew
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 + num2;
-                TextBox3.Text = Convert.ToString(ans);
-
-
+                _viewModel.Header = Convert.ToString(ans);
                 _history1.Items.Add(TextBox1.Text + "+" + TextBox2.Text + "=" + TextBox3.Text);
+                
             }
         }
 
@@ -94,8 +88,6 @@ namespace cakcuulatorNew
                 MessageBoxImage icon = MessageBoxImage.Error;
                 MessageBoxResult result;
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-
             }
 
             else if (TextBox1.Text == "")
@@ -120,14 +112,11 @@ namespace cakcuulatorNew
 
             else
             {
-
-
                 double num1 = Convert.ToDouble(TextBox1.Text);
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 - num2;
-                TextBox3.Text = Convert.ToString(ans);
-
+                _viewModel.Header = Convert.ToString(ans);
                 _history1.Items.Add(TextBox1.Text + "-" + TextBox2.Text + "=" + TextBox3.Text);
             }
         }
@@ -167,14 +156,11 @@ namespace cakcuulatorNew
             }
             else
             {
-
-
                 double num1 = Convert.ToDouble(TextBox1.Text);
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 * num2;
                 TextBox3.Text = Convert.ToString(ans);
-
                 _history1.Items.Add(TextBox1.Text + "*" + TextBox2.Text + "=" + TextBox3.Text);
             }
         }
@@ -189,10 +175,7 @@ namespace cakcuulatorNew
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult result;
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-
             }
-
             else if (TextBox1.Text == "")
             {
                 string messageBoxText = "Число а не введено!";
@@ -218,7 +201,7 @@ namespace cakcuulatorNew
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 / num2;
-                TextBox3.Text = Convert.ToString(ans);
+                _viewModel.Header = Convert.ToString(ans);
 
                 _history1.Items.Add(TextBox1.Text + "/" + TextBox2.Text + "=" + TextBox3.Text);
             }
@@ -235,9 +218,6 @@ namespace cakcuulatorNew
             {
                 _history1.Visibility = Visibility.Visible;
             }
-
-
-
         }
 
         private void TextBox1_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
@@ -246,7 +226,6 @@ namespace cakcuulatorNew
             {
                 e.Handled = true;
             }
-
             if (((e.Text).ToCharArray()[e.Text.Length - 1] == '.') || ((e.Text).ToCharArray()[e.Text.Length - 1] == ','))
             {
                 e.Handled = true;
@@ -267,12 +246,6 @@ namespace cakcuulatorNew
                 {
                     e.Handled = true;
                 }
-
-
-
-
-
-                
             }
 
             if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' & !((TextBox)sender).Text.Contains('-'))
@@ -281,15 +254,8 @@ namespace cakcuulatorNew
                 ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
                 ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
             }
-
-
-
-
             e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
         }
-
-        
-
 
         private void TextBox2_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
@@ -297,7 +263,6 @@ namespace cakcuulatorNew
             {
                 e.Handled = true;
             }
-
             if (((e.Text).ToCharArray()[e.Text.Length - 1] == '.') || ((e.Text).ToCharArray()[e.Text.Length - 1] == ','))
             {
                 e.Handled = true;
@@ -319,15 +284,12 @@ namespace cakcuulatorNew
                     e.Handled = true;
                 }
             }
-
             if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' && !((TextBox)sender).Text.Contains('-'))
             {
                 e.Handled = true;
                 ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
                 ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
             }
-
-
             e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
         }
 
@@ -336,7 +298,6 @@ namespace cakcuulatorNew
             double i;
             return double.TryParse(str, out i) && i >= double.MinValue && i <= double.MaxValue;
         }
-
         
         private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -350,9 +311,6 @@ namespace cakcuulatorNew
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "TXT|*.txt" };
             saveFileDialog.ShowDialog();
-
-
-
             if (string.IsNullOrEmpty(saveFileDialog.FileName))
             {
                 string messageBoxText = "Выберите файл!";
@@ -363,29 +321,20 @@ namespace cakcuulatorNew
                 result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
             }
             else
-
             {
-
-
                 using (System.IO.StreamWriter writer = new System.IO.StreamWriter(saveFileDialog.FileName))
                 {
                     for (int i = 0; i < _history1.Items.Count; i++)
                         await writer.WriteLineAsync(_history1.Items[i].ToString());
                 }
             }
-            
         }
-
-
-
 
         private async void buttonLoad_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "TXT|*.txt" };
             openFileDialog.ShowDialog();
-
             _history1.Items.Clear();
-
             string path = openFileDialog.FileName;
 
             if (string.IsNullOrEmpty(path))
@@ -415,7 +364,6 @@ namespace cakcuulatorNew
                         }
                     }
                 }
-
                 if (hasForeignCharacters)
                 {
                     string messageBoxText = "Файл содержит сторонние символы!";
@@ -428,8 +376,6 @@ namespace cakcuulatorNew
             }
         }
 
-
-
         private bool ValidateString(string input)
         {
             bool startsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d");
@@ -437,8 +383,76 @@ namespace cakcuulatorNew
 
             return startsWithNumber && endsWithNumber;
         }
-
-
     }
+
+
+
+    class FooView
+    {
+        public FooView()
+        {
+            InitializeComponents();
+        }
+
+        protected void InitializeComponents()
+        {
+
+        }
+    }
+
+
+    class FooViewModel : INotifyPropertyChanged
+    {
+        // Add
+        // Remove
+        // Move
+        // Reset (Clear)
+        public ObservableCollection<FooModel> FooModels = new ObservableCollection<FooModel>();
+
+        private string _header;
+        
+        public string Header
+        {
+            get => _header;
+            set
+            {
+                _header = value;
+                OnpropertyChanged(nameof(Header));
+            }
+        }
+
+        public FooViewModel()
+        {
+
+        }
+
+        private void InitModels(int n)
+        {
+            for (int i = 0; i < n; ++i)
+            {
+                FooModel fooModel = new FooModel($"Item - {i}");
+                FooModels.Add(fooModel);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnpropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+    class FooModel
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public FooModel(string name)
+        {
+            Name = name;
+        }
+    }
+
+
+
 
 }
