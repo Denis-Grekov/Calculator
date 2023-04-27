@@ -22,14 +22,14 @@ namespace cakcuulatorNew
   
     public partial class MainWindow : Window
     {
-        private FooViewModel _viewModel;
+        
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _viewModel = new FooViewModel();
-            DataContext = _viewModel;
+            
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -71,7 +71,8 @@ namespace cakcuulatorNew
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 + num2;
-                _viewModel.Header = Convert.ToString(ans);
+                
+                TextBox3.Text = Convert.ToString(ans);
                 _history1.Items.Add(TextBox1.Text + "+" + TextBox2.Text + "=" + TextBox3.Text);
                 
             }
@@ -116,7 +117,7 @@ namespace cakcuulatorNew
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 - num2;
-                _viewModel.Header = Convert.ToString(ans);
+                TextBox3.Text = Convert.ToString(ans);
                 _history1.Items.Add(TextBox1.Text + "-" + TextBox2.Text + "=" + TextBox3.Text);
             }
         }
@@ -201,7 +202,7 @@ namespace cakcuulatorNew
                 double num2 = Convert.ToDouble(TextBox2.Text);
                 double ans;
                 ans = num1 / num2;
-                _viewModel.Header = Convert.ToString(ans);
+                TextBox3.Text = Convert.ToString(ans);
 
                 _history1.Items.Add(TextBox1.Text + "/" + TextBox2.Text + "=" + TextBox3.Text);
             }
@@ -387,70 +388,7 @@ namespace cakcuulatorNew
 
 
 
-    class FooView
-    {
-        public FooView()
-        {
-            InitializeComponents();
-        }
-
-        protected void InitializeComponents()
-        {
-
-        }
-    }
-
-
-    class FooViewModel : INotifyPropertyChanged
-    {
-        // Add
-        // Remove
-        // Move
-        // Reset (Clear)
-        public ObservableCollection<FooModel> FooModels = new ObservableCollection<FooModel>();
-
-        private string _header;
-        
-        public string Header
-        {
-            get => _header;
-            set
-            {
-                _header = value;
-                OnpropertyChanged(nameof(Header));
-            }
-        }
-
-        public FooViewModel()
-        {
-
-        }
-
-        private void InitModels(int n)
-        {
-            for (int i = 0; i < n; ++i)
-            {
-                FooModel fooModel = new FooModel($"Item - {i}");
-                FooModels.Add(fooModel);
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnpropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-    class FooModel
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public FooModel(string name)
-        {
-            Name = name;
-        }
-    }
+    
 
 
 
