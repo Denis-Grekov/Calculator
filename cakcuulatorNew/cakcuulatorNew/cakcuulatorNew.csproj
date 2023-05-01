@@ -65,7 +65,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\IFooModel.cs" />
+    <Compile Include="Interfaces\ICalculatorModel.cs" />
+    <Compile Include="Interfaces\ICar.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
