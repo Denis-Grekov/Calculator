@@ -3,6 +3,11 @@ using cakcuulatorNew.Interfaces;
 
 namespace cakcuulatorNew.ViewModels
 {
+
+    public interface ICalculatorVM : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
     class CalculatorViewModel : INotifyPropertyChanged
     {
         private readonly ICalculatorModel _calculator;
@@ -12,23 +17,23 @@ namespace cakcuulatorNew.ViewModels
             _calculator = calculator;
         }
 
-        public double Num1
+        public double NumFirst
         {
             get => _calculator.Num1;
             set
             {
                 _calculator.Num1 = value;
-                OnPropertyChanged(nameof(Num1));
+                OnPropertyChanged(nameof(NumFirst));
             }
         }
 
-        public double Num2
+        public double NumSecond
         {
             get => _calculator.Num2;
             set
             {
                 _calculator.Num2 = value;
-                OnPropertyChanged(nameof(Num2));
+                OnPropertyChanged(nameof(NumSecond));
             }
         }
 
