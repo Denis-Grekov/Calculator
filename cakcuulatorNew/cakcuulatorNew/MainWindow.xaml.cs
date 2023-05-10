@@ -1,4 +1,6 @@
-﻿using cakcuulatorNew.ViewModels;
+﻿using cakcuulatorNew.Interfaces;
+using cakcuulatorNew.viewModel;
+
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -30,12 +32,13 @@ namespace cakcuulatorNew
             InitializeComponent();
 
             _calculatorVM = new CalculatorViewModel();
+            DataContext = _calculatorVM;
             
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            return;
 
             if (TextBox1.Text == "" && TextBox2.Text == "")
             {
@@ -224,75 +227,14 @@ namespace cakcuulatorNew
 
         private void TextBox1_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
-            if (!char.IsNumber(e.Text, e.Text.Length - 1))
-            {
-                e.Handled = true;
-            }
-            if (((e.Text).ToCharArray()[e.Text.Length - 1] == '.') || ((e.Text).ToCharArray()[e.Text.Length - 1] == ','))
-            {
-                e.Handled = true;
-                if (!((TextBox)sender).Text.Contains(','))
-                {
-                    if (((TextBox)sender).Text.Length == 0)
-                    {
-                        ((TextBox)sender).Text = "0,";
-                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-                    }
-                    else
-                    {
-                        ((TextBox)sender).Text += ",";
-                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-                    }
-                }
-                else
-                {
-                    e.Handled = true;
-                }
-            }
-
-            if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' & !((TextBox)sender).Text.Contains('-'))
-            {
-                e.Handled = true;
-                ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
-                ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-            }
-            e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
+            return;
+           
         }
 
         private void TextBox2_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
-            if (!char.IsNumber(e.Text, e.Text.Length - 1))
-            {
-                e.Handled = true;
-            }
-            if (((e.Text).ToCharArray()[e.Text.Length - 1] == '.') || ((e.Text).ToCharArray()[e.Text.Length - 1] == ','))
-            {
-                e.Handled = true;
-                if (!((TextBox)sender).Text.Contains(','))
-                {
-                    if (((TextBox)sender).Text.Length == 0)
-                    {
-                        ((TextBox)sender).Text = "0,";
-                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-                    }
-                    else
-                    {
-                        ((TextBox)sender).Text += ",";
-                        ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-                    }
-                }
-                else
-                {
-                    e.Handled = true;
-                }
-            }
-            if ((e.Text).ToCharArray()[e.Text.Length - 1] == '-' && !((TextBox)sender).Text.Contains('-'))
-            {
-                e.Handled = true;
-                ((TextBox)sender).Text = "-" + ((TextBox)sender).Text;
-                ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-            }
-            e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
+            return;
+            
         }
 
         public static bool IsValid(string str)
