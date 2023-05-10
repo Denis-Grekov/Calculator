@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using cakcuulatorNew.ViewModels;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,13 +23,13 @@ namespace cakcuulatorNew
   
     public partial class MainWindow : Window
     {
-        
+        private ICalculatorVM _calculatorVM;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            
+            _calculatorVM = new CalculatorViewModel();
             
         }
 
