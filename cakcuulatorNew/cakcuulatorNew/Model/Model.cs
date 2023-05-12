@@ -9,11 +9,11 @@ namespace cakcuulatorNew.Model
 {
     class CalculatorModel : ICalculatorModel
     {
-        private double numFirst;
-        private double numSecond;
-        private double result;
+        private double? numFirst = null;
+        private double? numSecond = null;
+        private double? result = null;
 
-        public double NumFirst
+        public double? NumFirst
         {
             get => numFirst;
             set
@@ -25,7 +25,7 @@ namespace cakcuulatorNew.Model
             }
         }
 
-        public double NumSecond
+        public double? NumSecond
         {
             get => numSecond;
             set
@@ -37,7 +37,7 @@ namespace cakcuulatorNew.Model
             }
         }
 
-        public double Result
+        public double? Result
         {
             get => result;
             set

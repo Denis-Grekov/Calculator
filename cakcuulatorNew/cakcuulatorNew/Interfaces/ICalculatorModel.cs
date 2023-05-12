@@ -8,9 +8,9 @@ namespace cakcuulatorNew.Interfaces
 {
     interface ICalculatorModel
     {
-        double NumFirst { get; set; }
-        double NumSecond { get; set; }
-        double Result { get; set; }
+        double? NumFirst { get; set; }
+        double? NumSecond { get; set; }
+        double? Result { get; set; }
         void Add();
         void Subtract();
         void Multiply();

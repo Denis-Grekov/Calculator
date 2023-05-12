@@ -40,176 +40,24 @@ namespace cakcuulatorNew
         {
             return;
 
-            if (TextBox1.Text == "" && TextBox2.Text == "")
-            {
-                string messageBoxText = "Не введены оба числа!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-
-            else if (TextBox1.Text == "")
-            {
-                string messageBoxText = "Числа а не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                
-            }
-            else if (TextBox2.Text == "")
-            {
-                string messageBoxText = "Числа b не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-            else
-            {
-                double num1 = Convert.ToDouble(TextBox1.Text);
-                double num2 = Convert.ToDouble(TextBox2.Text);
-                double ans;
-                ans = num1 + num2;
-                
-                TextBox3.Text = Convert.ToString(ans);
-                _history1.Items.Add(TextBox1.Text + "+" + TextBox2.Text + "=" + TextBox3.Text);
-                
-            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
-            if (TextBox1.Text == "" && TextBox2.Text == "")
-            {
-                string messageBoxText = "Не введены оба числа!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-
-            else if (TextBox1.Text == "")
-            {
-                string messageBoxText = "Числа а не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-            }
-            else if (TextBox2.Text == "")
-            {
-                string messageBoxText = "Числа b не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-
-            else
-            {
-                double num1 = Convert.ToDouble(TextBox1.Text);
-                double num2 = Convert.ToDouble(TextBox2.Text);
-                double ans;
-                ans = num1 - num2;
-                TextBox3.Text = Convert.ToString(ans);
-                _history1.Items.Add(TextBox1.Text + "-" + TextBox2.Text + "=" + TextBox3.Text);
-            }
+            return;
+            
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (TextBox1.Text == "" && TextBox2.Text == "")
-            {
-                string messageBoxText = "Не введены оба числа!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-
-            }
-
-            else if (TextBox1.Text == "")
-            {
-                string messageBoxText = "Числа а не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-            }
-            else if (TextBox2.Text == "")
-            {
-                string messageBoxText = "Числа b не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Error;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-            else
-            {
-                double num1 = Convert.ToDouble(TextBox1.Text);
-                double num2 = Convert.ToDouble(TextBox2.Text);
-                double ans;
-                ans = num1 * num2;
-                TextBox3.Text = Convert.ToString(ans);
-                _history1.Items.Add(TextBox1.Text + "*" + TextBox2.Text + "=" + TextBox3.Text);
-            }
+            return;
+            
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (TextBox1.Text == "" && TextBox2.Text == "")
-            {
-                string messageBoxText = "Не введены оба числа!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.YesNoCancel;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-            else if (TextBox1.Text == "")
-            {
-                string messageBoxText = "Число а не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.YesNoCancel;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-
-            }
-            else if (TextBox2.Text == "")
-            {
-                string messageBoxText = "Число b не введено!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.YesNoCancel;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-            else
-            {
-                double num1 = Convert.ToDouble(TextBox1.Text);
-                double num2 = Convert.ToDouble(TextBox2.Text);
-                double ans;
-                ans = num1 / num2;
-                TextBox3.Text = Convert.ToString(ans);
-
-                _history1.Items.Add(TextBox1.Text + "/" + TextBox2.Text + "=" + TextBox3.Text);
-            }
+            return;
+            
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)

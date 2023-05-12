@@ -30,7 +30,7 @@ namespace cakcuulatorNew.viewModel
             _calculator = calculator;
         }
 
-        public double NumFirst
+        public double? NumFirst
         {
             get => _calculator.NumFirst;
             set
@@ -40,10 +40,11 @@ namespace cakcuulatorNew.viewModel
                     _calculator.NumFirst = value;
                     OnPropertyChanged(nameof(NumFirst));
                 }
+                
             }
         }
 
-        public double NumSecond
+        public double? NumSecond
         {
             get => _calculator.NumSecond;
             set
@@ -56,7 +57,7 @@ namespace cakcuulatorNew.viewModel
             }
         }
 
-        public double Result => _calculator.Result;
+        public double? Result => _calculator.Result;
 
 
         
@@ -86,9 +87,28 @@ namespace cakcuulatorNew.viewModel
 
         }
 
-        public Interfaces.ICommand AddCommand
+        public System.Windows.Input.ICommand AddCommand
         {
-            get { return new RelayCommand(Add) as Interfaces.ICommand; }
+            get { return new RelayCommand(Add); }
+
+        }
+
+        public System.Windows.Input.ICommand SubtractCommand
+        {
+            get { return new RelayCommand(Subtract); }
+
+        }
+
+        public System.Windows.Input.ICommand MultiplyCommand
+        {
+            get { return new RelayCommand(Multiply); }
+
+        }
+
+        public System.Windows.Input.ICommand DivideCommand
+        {
+            get { return new RelayCommand(Divide); }
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
