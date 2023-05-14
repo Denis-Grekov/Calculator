@@ -20,10 +20,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" HorizontalAlignment="Left" Height="23" Margin="80,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" PreviewTextInput="TextBox1_PreviewTextInput_1" CommandManager.PreviewExecuted="textBox_PreviewExecuted"/>
+        <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" HorizontalAlignment="Left" Height="23" Margin="80,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"  />
 
         <TextBlock Grid.Row="0" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Введите а" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding NumSecond}" Grid.Row="1" x:Name="TextBox2" HorizontalAlignment="Left" Height="23" Margin="80,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" PreviewTextInput="TextBox2_PreviewTextInput_1" CommandManager.PreviewExecuted="textBox_PreviewExecuted"/>
+        <TextBox Text="{Binding NumSecond}" Grid.Row="1" x:Name="TextBox2" HorizontalAlignment="Left" Height="23" Margin="80,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" />
         <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Введите b" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" HorizontalAlignment="Left" Height="23" Margin="80,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" IsReadOnly="True"/>
         <TextBlock Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Ответ" VerticalAlignment="Top"/>
@@ -32,15 +32,15 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Command="{Binding AddCommand}" Grid.Row="0"  Content="сложение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-            <Button Command="{Binding SubtractCommand}" Grid.Row="1"  Content="разность" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-            <Button Command="{Binding MultiplyCommand}" Grid.Row="2"  Content="умножение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-            <Button Command="{Binding DivideCommand}" Grid.Row="3"  Content="деление" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+            <Button Command="{Binding AddCommand}" Grid.Row="0"  Content="сложение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding SubtractCommand}" Grid.Row="1"  Content="разность" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding MultiplyCommand}" Grid.Row="2"  Content="умножение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding DivideCommand}" Grid.Row="3"  Content="деление" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
         </StackPanel>
-        <ListBox x:Name="_history1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="235" Grid.RowSpan="2" Visibility="Hidden"/>
+        <ListBox ItemsSource="{Binding History}" x:Name="_history1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="235" Grid.RowSpan="2" Visibility="Hidden"/>
         <Button x:Name="historyButton5" Content="История" Grid.Column="1" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74" Click="Button_Click_4"/>
-        <Button x:Name="buttinSave" Content="Сохранить" Grid.Column="1" HorizontalAlignment="Left" Margin="120,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="buttinSave_Click"/>
-        <Button x:Name="buttonLoad" Content="Зарузить" Grid.Column="1" HorizontalAlignment="Left" Margin="220,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="buttonLoad_Click"/>
+        <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Grid.Column="1" HorizontalAlignment="Left" Margin="120,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="1" HorizontalAlignment="Left" Margin="220,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
 
 
 

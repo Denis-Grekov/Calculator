@@ -12,7 +12,7 @@ namespace cakcuulatorNew.Model
         private double? numFirst = null;
         private double? numSecond = null;
         private double? result = null;
-
+        public ICommand ToggleHistoryVisibilityCommand { get; private set; }
         public double? NumFirst
         {
             get => numFirst;

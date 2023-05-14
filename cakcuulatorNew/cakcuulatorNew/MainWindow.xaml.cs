@@ -36,29 +36,7 @@ namespace cakcuulatorNew
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            return;
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            return;
-            
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            return;
-            
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            return;
-            
-        }
+        
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
@@ -73,108 +51,9 @@ namespace cakcuulatorNew
             }
         }
 
-        private void TextBox1_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
-        {
-            return;
-           
-        }
-
-        private void TextBox2_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
-        {
-            return;
-            
-        }
-
-        public static bool IsValid(string str)
-        {
-            double i;
-            return double.TryParse(str, out i) && i >= double.MinValue && i <= double.MaxValue;
-        }
         
-        private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (e.Command == ApplicationCommands.Copy || e.Command == ApplicationCommands.Cut || e.Command == ApplicationCommands.Paste)
-            {
-                e.Handled = true;
-            }
-        }
 
-        private async void buttinSave_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "TXT|*.txt" };
-            saveFileDialog.ShowDialog();
-            if (string.IsNullOrEmpty(saveFileDialog.FileName))
-            {
-                string messageBoxText = "Выберите файл!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-            else
-            {
-                using (System.IO.StreamWriter writer = new System.IO.StreamWriter(saveFileDialog.FileName))
-                {
-                    for (int i = 0; i < _history1.Items.Count; i++)
-                        await writer.WriteLineAsync(_history1.Items[i].ToString());
-                }
-            }
-        }
-
-        private async void buttonLoad_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "TXT|*.txt" };
-            openFileDialog.ShowDialog();
-            _history1.Items.Clear();
-            string path = openFileDialog.FileName;
-
-            if (string.IsNullOrEmpty(path))
-            {
-                string messageBoxText = "Выберите файл!";
-                string caption = "Word Processor";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult result;
-                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-            }
-            else
-            {
-                bool hasForeignCharacters = false;
-                using (System.IO.StreamReader reader = new System.IO.StreamReader(path))
-                {
-                    string? line;
-                    while ((line = await reader.ReadLineAsync()) != null)
-                    {
-                        if (ValidateString(line))
-                        {
-                            _history1.Items.Add(line);
-                        }
-                        else
-                        {
-                            hasForeignCharacters = true;
-                        }
-                    }
-                }
-                if (hasForeignCharacters)
-                {
-                    string messageBoxText = "Файл содержит сторонние символы!";
-                    string caption = "Word Processor";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    MessageBoxResult result;
-                    result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-                }
-            }
-        }
-
-        private bool ValidateString(string input)
-        {
-            bool startsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d");
-            bool endsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"\d$");
-
-            return startsWithNumber && endsWithNumber;
-        }
+        
     }
 
 
