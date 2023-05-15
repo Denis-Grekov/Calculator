@@ -18,6 +18,7 @@ namespace cakcuulatorNew.viewModel
 
     class CalculatorViewModel : ICalculatorVM
     {
+        
         private readonly Regex _doubleRegex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
         private readonly Regex _intRegex = new Regex(@"^[-+]?[0-9]+$");
 
@@ -44,7 +45,7 @@ namespace cakcuulatorNew.viewModel
                     _calculator.NumFirst = value;
                     OnPropertyChanged(nameof(NumFirst));
                 }
-
+                
             }
         }
 
@@ -58,7 +59,9 @@ namespace cakcuulatorNew.viewModel
                     _calculator.NumSecond = value;
                     OnPropertyChanged(nameof(NumSecond));
                 }
+                
             }
+
         }
 
         public double? Result => _calculator.Result;
@@ -67,38 +70,55 @@ namespace cakcuulatorNew.viewModel
 
         public void Add()
         {
-            _calculator.Add();
+            if (NumFirst.HasValue && NumSecond.HasValue)
+            {
+                _calculator.Add();
+
+                OnPropertyChanged(nameof(Result));
+
+                string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
+                _history.Add(historyItem);
+            }
            
-            OnPropertyChanged(nameof(Result));
-            string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
-            _history.Add(historyItem);
         }
 
         public void Subtract()
         {
-            _calculator.Subtract();
-            
-            OnPropertyChanged(nameof(Result));
-            string historyItem = $"{NumFirst} - {NumSecond} = {Result}";
-            _history.Add(historyItem);
+            if (NumFirst.HasValue && NumSecond.HasValue)
+            {
+                _calculator.Subtract();
+
+                OnPropertyChanged(nameof(Result));
+
+                string historyItem = $"{NumFirst} - {NumSecond} = {Result}";
+                _history.Add(historyItem);
+            }
         }
 
         public void Multiply()
         {
-            _calculator.Multiply();
-            
-            OnPropertyChanged(nameof(Result));
-            string historyItem = $"{NumFirst} * {NumSecond} = {Result}";
-            _history.Add(historyItem);
+            if (NumFirst.HasValue && NumSecond.HasValue)
+            {
+                _calculator.Multiply();
+
+                OnPropertyChanged(nameof(Result));
+
+                string historyItem = $"{NumFirst} * {NumSecond} = {Result}";
+                _history.Add(historyItem);
+            }
         }
 
         public void Divide()
         {
-            _calculator.Divide();
-            
-            OnPropertyChanged(nameof(Result));
-            string historyItem = $"{NumFirst} / {NumSecond} = {Result}";
-            _history.Add(historyItem);
+            if (NumFirst.HasValue && NumSecond.HasValue)
+            {
+                _calculator.Divide();
+
+                OnPropertyChanged(nameof(Result));
+
+                string historyItem = $"{NumFirst} / {NumSecond} = {Result}";
+                _history.Add(historyItem);
+            }
         }
 
         public System.Windows.Input.ICommand SaveHistoryCommand => new RelayCommand(async () =>
@@ -172,7 +192,43 @@ namespace cakcuulatorNew.viewModel
             }
         });
 
-        
+
+
+        private Visibility _historyVisibility = Visibility.Hidden;
+
+        public Visibility HistoryVisibility
+        {
+            get { return _historyVisibility; }
+            set
+            {
+                if (_historyVisibility != value)
+                {
+                    _historyVisibility = value;
+                    OnPropertyChanged(nameof(HistoryVisibility));
+                }
+            }
+        }
+
+        public void Visible()
+        {
+            if (HistoryVisibility == Visibility.Visible)
+            {
+                HistoryVisibility = Visibility.Hidden;
+            }
+            else
+            {
+                HistoryVisibility = Visibility.Visible;
+            }
+        }
+
+        public System.Windows.Input.ICommand VisibleCommand
+        {
+            get { return new RelayCommand(Visible); }
+
+        }
+
+
+
         private bool ValidateString(string input)
         {
             bool startsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d");
@@ -184,6 +240,7 @@ namespace cakcuulatorNew.viewModel
 
         public System.Windows.Input.ICommand AddCommand
         {
+
             get { return new RelayCommand(Add); }
 
         }

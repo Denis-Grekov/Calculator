@@ -37,8 +37,8 @@
             <Button Command="{Binding MultiplyCommand}" Grid.Row="2"  Content="умножение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
             <Button Command="{Binding DivideCommand}" Grid.Row="3"  Content="деление" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
         </StackPanel>
-        <ListBox ItemsSource="{Binding History}" x:Name="_history1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="235" Grid.RowSpan="2" Visibility="Hidden"/>
-        <Button x:Name="historyButton5" Content="История" Grid.Column="1" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74" Click="Button_Click_4"/>
+        <ListBox Visibility="{Binding HistoryVisibility}" ItemsSource="{Binding History}" x:Name="_history1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="235" Grid.RowSpan="2"/>
+        <Button Command="{Binding VisibleCommand}" x:Name="historyButton5" Content="История" Grid.Column="1" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74"/>
         <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Grid.Column="1" HorizontalAlignment="Left" Margin="120,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="1" HorizontalAlignment="Left" Margin="220,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
 

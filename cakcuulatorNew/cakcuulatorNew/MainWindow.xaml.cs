@@ -33,27 +33,7 @@ namespace cakcuulatorNew
 
             _calculatorVM = new CalculatorViewModel();
             DataContext = _calculatorVM;
-            
         }
-
-        
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            
-            if (_history1.Visibility == Visibility.Visible) 
-            {
-                _history1.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                _history1.Visibility = Visibility.Visible;
-            }
-        }
-
-        
-
-        
     }
 
 
