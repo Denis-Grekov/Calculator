@@ -25,6 +25,7 @@ namespace cakcuulatorNew
   
     public partial class MainWindow : Window
     {
+        public bool IsListBoxVisible { get; set; }
         private ICalculatorVM _calculatorVM;
 
         public MainWindow()
@@ -34,13 +35,33 @@ namespace cakcuulatorNew
             _calculatorVM = new CalculatorViewModel();
             DataContext = _calculatorVM;
         }
+
+        private void TextBox1_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            if (!char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)) && e.Key != Key.Decimal)
+            {
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Decimal && (textBox.Text.Contains(".") || textBox.SelectionStart == 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox2_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            if (!char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)) && e.Key != Key.Decimal)
+            {
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Decimal && (textBox.Text.Contains(".") || textBox.SelectionStart == 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        
     }
-
-
-
-    
-
-
-
-
 }

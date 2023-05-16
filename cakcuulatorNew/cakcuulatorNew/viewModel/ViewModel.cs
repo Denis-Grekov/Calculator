@@ -1,5 +1,6 @@
 ﻿using cakcuulatorNew.Interfaces;
 using cakcuulatorNew.Model;
+using cakcuulatorNew.utils;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,6 @@ namespace cakcuulatorNew.viewModel
 
     class CalculatorViewModel : ICalculatorVM
     {
-        
         private readonly Regex _doubleRegex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
         private readonly Regex _intRegex = new Regex(@"^[-+]?[0-9]+$");
 
@@ -45,7 +45,6 @@ namespace cakcuulatorNew.viewModel
                     _calculator.NumFirst = value;
                     OnPropertyChanged(nameof(NumFirst));
                 }
-                
             }
         }
 
@@ -59,10 +58,21 @@ namespace cakcuulatorNew.viewModel
                     _calculator.NumSecond = value;
                     OnPropertyChanged(nameof(NumSecond));
                 }
-                
             }
-
         }
+
+        public System.Windows.Input.ICommand ToggleListBoxVisibilityCommand { get; }
+
+        private void ToggleListBoxVisibility()
+        {
+            IsListBoxVisible = !IsListBoxVisible;
+        }
+
+        public System.Windows.Input.ICommand VisCommand
+        {
+            get { return new RelayCommand(ToggleListBoxVisibility); }
+        }
+
 
         public double? Result => _calculator.Result;
 
@@ -79,7 +89,6 @@ namespace cakcuulatorNew.viewModel
                 string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
                 _history.Add(historyItem);
             }
-           
         }
 
         public void Subtract()
@@ -192,8 +201,6 @@ namespace cakcuulatorNew.viewModel
             }
         });
 
-
-
         private Visibility _historyVisibility = Visibility.Hidden;
 
         public Visibility HistoryVisibility
@@ -209,26 +216,6 @@ namespace cakcuulatorNew.viewModel
             }
         }
 
-        public void Visible()
-        {
-            if (HistoryVisibility == Visibility.Visible)
-            {
-                HistoryVisibility = Visibility.Hidden;
-            }
-            else
-            {
-                HistoryVisibility = Visibility.Visible;
-            }
-        }
-
-        public System.Windows.Input.ICommand VisibleCommand
-        {
-            get { return new RelayCommand(Visible); }
-
-        }
-
-
-
         private bool ValidateString(string input)
         {
             bool startsWithNumber = System.Text.RegularExpressions.Regex.IsMatch(input, @"^\d");
@@ -236,6 +223,27 @@ namespace cakcuulatorNew.viewModel
 
             return startsWithNumber && endsWithNumber;
         }
+
+        private bool _isListBoxVisible;
+
+        public bool IsListBoxVisible
+        {
+            get { return _isListBoxVisible; }
+            set
+            {
+                if (_isListBoxVisible != value)
+                {
+                    _isListBoxVisible = value;
+                    OnPropertyChanged(nameof(IsListBoxVisible));
+                }
+            }
+        }
+
+        
+
+        public BoolToVisibilityConverter Converter { get; }
+
+        
 
 
         public System.Windows.Input.ICommand AddCommand
@@ -260,13 +268,14 @@ namespace cakcuulatorNew.viewModel
             get { return new RelayCommand(Divide); }
         }
 
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }
 

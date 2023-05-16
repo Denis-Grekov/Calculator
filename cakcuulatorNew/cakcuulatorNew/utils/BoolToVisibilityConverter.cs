@@ -13,9 +13,12 @@ namespace cakcuulatorNew.utils
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var boolValue = (bool)value;
+            if (value is bool boolValue && boolValue)
+            {
+                return Visibility.Visible;
+            }
 
-            return boolValue ? Visibility.Visible : Visibility.Collapsed;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
