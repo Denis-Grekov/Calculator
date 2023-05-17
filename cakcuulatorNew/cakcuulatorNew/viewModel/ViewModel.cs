@@ -19,8 +19,8 @@ namespace cakcuulatorNew.viewModel
 
     class CalculatorViewModel : ICalculatorVM
     {
-        private readonly Regex _doubleRegex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        private readonly Regex _intRegex = new Regex(@"^[-+]?[0-9]+$");
+        public Regex _doubleRegex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
+        public Regex _intRegex = new Regex(@"^[-+]?[0-9]+$");
 
         private readonly ICalculatorModel _calculator;
         private readonly ObservableCollection<string> _history = new ObservableCollection<string>();
