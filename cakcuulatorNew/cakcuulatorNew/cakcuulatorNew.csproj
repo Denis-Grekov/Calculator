@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="utils\BoolToVisibilityConverter.cs" />
     <Compile Include="utils\RelayCommand.cs" />
+    <Compile Include="utils\RelayCommandTwoObj.cs" />
     <Compile Include="viewModel\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

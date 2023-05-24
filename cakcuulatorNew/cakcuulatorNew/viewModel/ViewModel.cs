@@ -25,6 +25,7 @@ namespace cakcuulatorNew.viewModel
 
         private readonly ICalculatorModel _calculator;
         private readonly ObservableCollection<string> _history = new ObservableCollection<string>();
+        
 
         public CalculatorViewModel()
         {
@@ -79,19 +80,16 @@ namespace cakcuulatorNew.viewModel
         public TextBox TextBox2 { get; set; }
         public void Add()
         {
-            
                 _calculator.Add();
-
-                
-
                 OnPropertyChanged(nameof(Result));
-                
+            if (NumFirst != null && NumSecond != null)
+            {
                 string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
                 _history.Add(historyItem);
+            }
+            
                 NumFirst = Result;
                 NumSecond = null;
-
-                
         }
 
         public void Subtract()
@@ -101,9 +99,11 @@ namespace cakcuulatorNew.viewModel
 
                
                 OnPropertyChanged(nameof(Result));
-                
+            if (NumFirst != null && NumSecond != null)
+            {
                 string historyItem = $"{NumFirst} - {NumSecond} = {Result}";
                 _history.Add(historyItem);
+            }
                 NumFirst = Result;
                 NumSecond = null;
         }
@@ -114,9 +114,13 @@ namespace cakcuulatorNew.viewModel
                 _calculator.Multiply();
                
                 OnPropertyChanged(nameof(Result));
-                
+                if (NumFirst != null && NumSecond != null)
+            {
                 string historyItem = $"{NumFirst} * {NumSecond} = {Result}";
                 _history.Add(historyItem);
+                
+            }
+                
                 NumFirst = Result;
                 NumSecond = null;
         }
@@ -127,9 +131,11 @@ namespace cakcuulatorNew.viewModel
                 _calculator.Divide();
                 
                 OnPropertyChanged(nameof(Result));
-                
+            if (NumFirst != null && NumSecond != null)
+            {
                 string historyItem = $"{NumFirst} / {NumSecond} = {Result}";
                 _history.Add(historyItem);
+            }
                 NumFirst = Result;
                 NumSecond = null;
         }
@@ -272,6 +278,26 @@ namespace cakcuulatorNew.viewModel
             get { return new RelayCommand(Divide); }
         }
 
+        
+         private RelayCommandTwoObj removeCommand;
+        public RelayCommandTwoObj RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??
+                  (removeCommand = new RelayCommandTwoObj(obj =>
+                  {
+
+                      string historyLast = _history.Last();
+                      if (historyLast != null)
+                      {
+                          _history.Remove(historyLast);
+                      }
+                      
+                  }, (obj) => _history.Count > 0));
+            }
+                 
+        }
         
 
         public event PropertyChangedEventHandler PropertyChanged;

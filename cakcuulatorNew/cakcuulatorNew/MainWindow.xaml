@@ -45,6 +45,7 @@
         <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Grid.Column="1" HorizontalAlignment="Left" Margin="120,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="1" HorizontalAlignment="Left" Margin="220,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="localizationBut" Content="Eng" HorizontalAlignment="Left" Margin="124,48,0,0" Grid.Row="3" VerticalAlignment="Top" Width="74" Click="localizationBut_Click"/>
+        <Button Content="Удалить" Command="{Binding RemoveCommand}" x:Name="DeleteBut" Grid.Column="1" HorizontalAlignment="Left" Margin="282,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="74"/>
 
 
 
