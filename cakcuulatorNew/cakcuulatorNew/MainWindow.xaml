@@ -35,10 +35,10 @@
 
 
         <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <Button Command="{Binding AddCommand}" x:Name="addBut" Grid.Row="0"  Content="сложение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button Command="{Binding SubtractCommand}" x:Name="subBut" Grid.Row="1"  Content="разность" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button Command="{Binding MultiplyCommand}" x:Name="mulBut" Grid.Row="2"  Content="умножение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button Command="{Binding DivideCommand}" x:Name="divBut" Grid.Row="3"  Content="деление" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button Command="{Binding AddCommand}" x:Name="addBut" Grid.Row="0"  Content="сложение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="addBut_Click"/>
+            <Button Command="{Binding SubtractCommand}" x:Name="subBut" Grid.Row="1"  Content="разность" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="subBut_Click"/>
+            <Button Command="{Binding MultiplyCommand}" x:Name="mulBut" Grid.Row="2"  Content="умножение" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="mulBut_Click"/>
+            <Button Command="{Binding DivideCommand}" x:Name="divBut" Grid.Row="3"  Content="деление" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="75" Click="divBut_Click"/>
         </StackPanel>
         <ListBox ItemsSource="{Binding History}" Visibility="{Binding IsListBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="_history1" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="235" Grid.RowSpan="2"/>
         <Button Command="{Binding VisCommand}" x:Name="historyButton5" Content="История" Grid.Column="1" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="74"/>
@@ -46,6 +46,7 @@
         <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="1" HorizontalAlignment="Left" Margin="220,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="localizationBut" Content="Eng" HorizontalAlignment="Left" Margin="124,48,0,0" Grid.Row="3" VerticalAlignment="Top" Width="74" Click="localizationBut_Click"/>
         <Button Content="Удалить" Command="{Binding RemoveCommand}" x:Name="DeleteBut" Grid.Column="1" HorizontalAlignment="Left" Margin="282,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="74"/>
+        <Button Command="{Binding MoveFocusToTextBox2}" Content="Button" HorizontalAlignment="Left" Margin="272,54,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75"/>
 
 
 

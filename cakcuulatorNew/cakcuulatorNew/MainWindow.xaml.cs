@@ -121,5 +121,28 @@ namespace cakcuulatorNew
             }
         }
 
+        private void addBut_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox2.Focus();
+            TextBox2.Select(TextBox2.Text.Length, 0);
+        }
+
+        private void subBut_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox2.Focus();
+            TextBox2.Select(TextBox2.Text.Length, 0);
+        }
+
+        private void mulBut_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox2.Focus();
+            TextBox2.Select(TextBox2.Text.Length, 0);
+        }
+
+        private void divBut_Click(object sender, RoutedEventArgs e)
+        {
+            TextBox2.Focus();
+            TextBox2.Select(TextBox2.Text.Length, 0);
+        }
     }
 }

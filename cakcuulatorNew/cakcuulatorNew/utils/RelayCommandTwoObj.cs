@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace cakcuulatorNew.utils
 {
-    class RelayCommandTwoObj
+    class RelayCommandTwoObj : ICommand
     {
         private Action<object> execute;
         private Func<object, bool> canExecute;

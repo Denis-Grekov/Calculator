@@ -78,8 +78,27 @@ namespace cakcuulatorNew.viewModel
 
         public ObservableCollection<string> History => _history;
         public TextBox TextBox2 { get; set; }
+
+
+        private System.Windows.Input.ICommand _focusTextBoxCommand;
+        public System.Windows.Input.ICommand FocusTextBoxCommand
+        {
+            get => _focusTextBoxCommand;
+            set
+            {
+                _focusTextBoxCommand = value;
+                OnPropertyChanged(nameof(FocusTextBoxCommand));
+            }
+        }
+        private void MoveFocusToTextBox2()
+        {
+            FocusTextBoxCommand?.Execute(null);
+        }
+
+
         public void Add()
         {
+
                 _calculator.Add();
                 OnPropertyChanged(nameof(Result));
             if (NumFirst != null && NumSecond != null)
@@ -90,6 +109,7 @@ namespace cakcuulatorNew.viewModel
             
                 NumFirst = Result;
                 NumSecond = null;
+            
         }
 
         public void Subtract()
@@ -253,8 +273,8 @@ namespace cakcuulatorNew.viewModel
 
         public BoolToVisibilityConverter Converter { get; }
 
-        
 
+        
 
         public System.Windows.Input.ICommand AddCommand
         {
@@ -298,7 +318,8 @@ namespace cakcuulatorNew.viewModel
             }
                  
         }
-        
+
+      
 
         public event PropertyChangedEventHandler PropertyChanged;
 

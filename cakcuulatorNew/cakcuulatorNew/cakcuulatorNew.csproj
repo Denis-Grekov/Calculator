@@ -67,6 +67,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="utils\BoolToVisibilityConverter.cs" />
+    <Compile Include="utils\FocusTextBoxCommand.cs" />
     <Compile Include="utils\RelayCommand.cs" />
     <Compile Include="utils\RelayCommandTwoObj.cs" />
     <Compile Include="viewModel\ViewModel.cs" />
