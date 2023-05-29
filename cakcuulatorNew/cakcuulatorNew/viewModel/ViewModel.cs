@@ -80,21 +80,8 @@ namespace cakcuulatorNew.viewModel
         public TextBox TextBox2 { get; set; }
 
 
-        private System.Windows.Input.ICommand _focusTextBoxCommand;
-        public System.Windows.Input.ICommand FocusTextBoxCommand
-        {
-            get => _focusTextBoxCommand;
-            set
-            {
-                _focusTextBoxCommand = value;
-                OnPropertyChanged(nameof(FocusTextBoxCommand));
-            }
-        }
-        private void MoveFocusToTextBox2()
-        {
-            FocusTextBoxCommand?.Execute(null);
-        }
-
+        
+        
 
         public void Add()
         {
@@ -106,9 +93,10 @@ namespace cakcuulatorNew.viewModel
                 string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
                 _history.Add(historyItem);
             }
+
+            NumFirst = Result;
+             NumSecond = null;
             
-                NumFirst = Result;
-                NumSecond = null;
             
         }
 
@@ -296,6 +284,7 @@ namespace cakcuulatorNew.viewModel
         public System.Windows.Input.ICommand DivideCommand
         {
             get { return new RelayCommand(Divide); }
+
         }
 
         
@@ -304,8 +293,7 @@ namespace cakcuulatorNew.viewModel
         {
             get
             {
-                return removeCommand ??
-                  (removeCommand = new RelayCommandTwoObj(obj =>
+                return removeCommand ??= new RelayCommandTwoObj(obj =>
                   {
 
                       string historyLast = _history.Last();
@@ -314,12 +302,27 @@ namespace cakcuulatorNew.viewModel
                           _history.Remove(historyLast);
                       }
                       
-                  }, (obj) => _history.Count > 0));
-            }
-                 
+                  }, (obj) => _history.Count > 0);
+            }      
         }
 
-      
+
+        private RelayCommandTwoObj focusCommand;
+        public RelayCommandTwoObj FocusCommand
+        {
+            get
+            {
+                return focusCommand ??= new RelayCommandTwoObj(obj =>
+                {
+                    if (obj is TextBox textBox)
+                    {
+                        textBox.Focus();
+                    }
+                });
+            }
+            
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
