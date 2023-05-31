@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace cakcuulatorNew.utils
@@ -24,6 +25,15 @@ namespace cakcuulatorNew.utils
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+    public class CustomTextBox : TextBox
+    {
+        protected override void OnTextChanged(TextChangedEventArgs e)
+        {
+            base.OnTextChanged(e);
+
+            this.Focus();
         }
     }
 }

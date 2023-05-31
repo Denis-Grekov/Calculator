@@ -90,7 +90,7 @@ namespace cakcuulatorNew
                 localizationBut.Content = cakcuulatorNew.Properties.ResourcesRu.s_localization;
             }
         }
+        
 
-       
     }
 }

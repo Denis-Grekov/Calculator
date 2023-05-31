@@ -86,8 +86,8 @@ namespace cakcuulatorNew.viewModel
         public void Add()
         {
 
-                _calculator.Add();
-                OnPropertyChanged(nameof(Result));
+            _calculator.Add();
+            OnPropertyChanged(nameof(Result));
             if (NumFirst != null && NumSecond != null)
             {
                 string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
@@ -97,7 +97,7 @@ namespace cakcuulatorNew.viewModel
             NumFirst = Result;
              NumSecond = null;
             
-            
+
         }
 
         public void Subtract()
@@ -266,10 +266,11 @@ namespace cakcuulatorNew.viewModel
 
         public System.Windows.Input.ICommand AddCommand
         {
-
             get { return new RelayCommand(Add); }
 
         }
+        
+
 
         public System.Windows.Input.ICommand SubtractCommand
         {
@@ -331,5 +332,9 @@ namespace cakcuulatorNew.viewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
+    
+
+
 }
 
