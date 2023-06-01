@@ -29,6 +29,11 @@ namespace cakcuulatorNew.utils
     }
     public class CustomTextBox : TextBox
     {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+        }
+
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
