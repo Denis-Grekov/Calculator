@@ -37,7 +37,7 @@
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="Width" Value="172"/>
             <Setter Property="Height" Value="170"/>
-            <Setter Property="Margin" Value="72,5,0,0"/>
+            <Setter Property="Margin" Value="7,5,0,0"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
@@ -49,30 +49,31 @@
         <KeyBinding Command="{Binding DivideCommand}" Key="Divide"/>
 
     </Window.InputBindings>
-    
-    <Grid>
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
 
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> 
+            <RowDefinition Height="Auto" /> 
+            <RowDefinition Height="Auto" /> 
+            <RowDefinition Height="Auto" /> 
+            <RowDefinition Height="Auto" /> 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="97*"/>
-            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition Width="347*" />
+            <ColumnDefinition Width="42*" />
+            <ColumnDefinition Width="396*" />
         </Grid.ColumnDefinitions>
 
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
-            
+
             <Style TargetType="utils:CustomTextBox" BasedOn="{StaticResource DefaultTextBoxStyle2}"/>
             <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}"/>
             <Style TargetType="ListBox" BasedOn="{StaticResource DefaultListBoxStyle}"/>
         </Grid.Resources>
-        
+
         <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" TextWrapping="Wrap" />
 
         <TextBlock x:Name="firstNum" Grid.Row="0" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Введите а" Grid.ColumnSpan="2"/>
@@ -82,33 +83,42 @@
         <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" TextWrapping="Wrap" IsReadOnly="True"/>
         <TextBlock x:Name="answer"  Grid.Row="2" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Ответ" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
 
-        
-        <StackPanel Orientation="Horizontal" Grid.Column="2">
+
+        <StackPanel Orientation="Horizontal" Grid.Column="3">
 
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
             </StackPanel.Resources>
-            
+
             <Button Command="{Binding AddCommand}" x:Name="addBut" Grid.Row="0"  Content="сложение"/>
             <Button Command="{Binding SubtractCommand}" x:Name="subBut" Grid.Row="1"  Content="разность"/>
             <Button Command="{Binding MultiplyCommand}" x:Name="mulBut" Grid.Row="2"  Content="умножение"/>
             <Button Command="{Binding DivideCommand}" x:Name="divBut" Grid.Row="3"  Content="деление"/>
         </StackPanel>
 
-         <ListBox ItemsSource="{Binding History}" Visibility="{Binding IsListBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="_history1" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
-        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="3">
+        
+        
+        
+        <ListBox ItemsSource="{Binding History}" Visibility="{Binding IsListBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="_history1" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                        <Button Background="Red" Content="X" Width="20" Height="20" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="3">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
             </StackPanel.Resources>
-        <Button Command="{Binding VisCommand}" x:Name="historyButton5" Content="История" Grid.Column="2" />
-        <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Grid.Column="2"/>
-        <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="2" />
-           
-       
-        <Button Content="Удалить" Command="{Binding RemoveCommand}" CommandParameter="{Binding ElementName=_history1}" x:Name="DeleteBut" Grid.Column="2" />
+            <Button Command="{Binding VisCommand}" x:Name="historyButton5" Content="История" Grid.Column="2" />
+            <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Grid.Column="2"/>
+            <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="2" />
         </StackPanel>
         <Button x:Name="localizationBut" Content="Eng" Grid.Row="3" Click="localizationBut_Click" Grid.Column="1"/>
 
     </Grid>
-    
+
 </Window>

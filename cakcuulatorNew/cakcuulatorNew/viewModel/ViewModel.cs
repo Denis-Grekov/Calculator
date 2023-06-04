@@ -26,6 +26,7 @@ namespace cakcuulatorNew.viewModel
         private readonly ICalculatorModel _calculator;
         private readonly ObservableCollection<string> _history = new ObservableCollection<string>();
         
+        
 
         public CalculatorViewModel()
         {
@@ -92,8 +93,9 @@ namespace cakcuulatorNew.viewModel
             {
                 string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
                 _history.Add(historyItem);
+                
             }
-
+            
             NumFirst = Result;
              NumSecond = null;
             
@@ -111,6 +113,7 @@ namespace cakcuulatorNew.viewModel
             {
                 string historyItem = $"{NumFirst} - {NumSecond} = {Result}";
                 _history.Add(historyItem);
+                
             }
                 NumFirst = Result;
                 NumSecond = null;
@@ -143,6 +146,7 @@ namespace cakcuulatorNew.viewModel
             {
                 string historyItem = $"{NumFirst} / {NumSecond} = {Result}";
                 _history.Add(historyItem);
+                
             }
                 NumFirst = Result;
                 NumSecond = null;
@@ -295,16 +299,16 @@ namespace cakcuulatorNew.viewModel
             get
             {
                 return removeCommand ??= new RelayCommandTwoObj(obj =>
-                  {
-
-                      string historyLast = _history.Last();
-                      if (historyLast != null)
-                      {
-                          _history.Remove(historyLast);
-                      }
-                      
-                  }, (obj) => _history.Count > 0);
-            }      
+                {
+                    if (obj is string item)
+                    {
+                        if (_history.Contains(item))
+                        {
+                            _history.Remove(item);
+                        }
+                    }
+                });
+            }
         }
 
 
