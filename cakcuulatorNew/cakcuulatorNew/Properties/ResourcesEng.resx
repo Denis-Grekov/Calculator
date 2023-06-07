@@ -121,13 +121,13 @@
     <value>Addition</value>
   </data>
   <data name="s_answer" xml:space="preserve">
-    <value>answer</value>
+    <value>Result</value>
   </data>
   <data name="s_dividing" xml:space="preserve">
     <value>Dividing</value>
   </data>
   <data name="s_firstNum" xml:space="preserve">
-    <value>write num a</value>
+    <value>First number</value>
   </data>
   <data name="s_history" xml:space="preserve">
     <value>History</value>
@@ -145,7 +145,7 @@
     <value>Save history</value>
   </data>
   <data name="s_secondNum" xml:space="preserve">
-    <value>write num b</value>
+    <value>Second number</value>
   </data>
   <data name="s_subtracting" xml:space="preserve">
     <value>Subtracting</value>

@@ -133,7 +133,7 @@
     <value>История</value>
   </data>
   <data name="s_load" xml:space="preserve">
-    <value>Загрузка истории</value>
+    <value>Загрузка</value>
   </data>
   <data name="s_localization" xml:space="preserve">
     <value>Eng</value>
@@ -142,7 +142,7 @@
     <value>Умножение</value>
   </data>
   <data name="s_save" xml:space="preserve">
-    <value>Сохранение истории</value>
+    <value>Сохранение </value>
   </data>
   <data name="s_secondNum" xml:space="preserve">
     <value>Введите b</value>

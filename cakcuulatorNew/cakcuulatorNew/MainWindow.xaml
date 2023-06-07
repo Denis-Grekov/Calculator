@@ -19,7 +19,7 @@
 
         <Style TargetType="TextBox" x:Key="DefaultTextBoxStyle">
             <Setter Property="Grid.Column" Value="1"/>
-            <Setter Property="Width" Value="1720"/>
+            <Setter Property="Width" Value="172"/>
             <Setter Property="Height" Value="23"/>
 
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -79,64 +79,93 @@
         </Grid.RowDefinitions>
 
 
-        <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Stretch" x:Name="dad" >
+        <Grid Grid.Column="0" VerticalAlignment="Stretch" x:Name="dad" >
 
-            <StackPanel VerticalAlignment="Stretch" >
-                <TextBlock x:Name="firstNum" Grid.Row="0" Text="Введите а" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="firstNum" Grid.Row="0" Text="Введите а" />
 
 
                 <TextBlock x:Name="secondNum"  Grid.Row="1" Text="Введите b"  />
 
                 <TextBlock x:Name="answer"  Grid.Row="2" Text="Ответ" />
-            </StackPanel>
-            <StackPanel VerticalAlignment="Stretch" Width="200" x:Name="textPanel" Margin="10, 0, 0, 0">
-                <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" TextWrapping="Wrap" Width="{Binding ElementName=textPanel, Path=ActualWidth}"/>
-                <utils:CustomTextBox Text="{Binding NumSecond, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" x:Name="TextBox22" Width="{Binding ElementName=textPanel, Path=ActualWidth}" />
-                <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" TextWrapping="Wrap" IsReadOnly="True" Width="{Binding ElementName=textPanel, Path=ActualWidth}"/>
-            </StackPanel>
+            
+            
+                <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" TextWrapping="Wrap" Width="150"/>
+            <utils:CustomTextBox Text="{Binding NumSecond, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" x:Name="TextBox22" Width="150" />
+            <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" TextWrapping="Wrap" IsReadOnly="True" Width="150"/>
+            
 
 
 
-        </StackPanel>
+        </Grid>
 
 
-        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+        <Grid Grid.Column="2"  HorizontalAlignment="Stretch" >
 
-            <StackPanel.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
-            </StackPanel.Resources>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" x:Name="butPanel">
-                <Button Command="{Binding AddCommand}" x:Name="addBut" Content="сложение" Width="{Binding ElementName=butPanel, Path=ActualWidth}"/>
-                <Button Command="{Binding SubtractCommand}" x:Name="subBut" Content="разность" />
-            </StackPanel>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Stretch"   >
-                <Button Command="{Binding MultiplyCommand}" x:Name="mulBut" Content="умножение"/>
-                <Button Command="{Binding DivideCommand}" x:Name="divBut" Content="деление"/>
-            </StackPanel>
-        </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
 
-        <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal" Width="auto" x:Name="dadPanel">
-            <StackPanel Orientation="Vertical"  VerticalAlignment="Bottom" Width="200" x:Name="listPanel" >
-                <ListBox ItemsSource="{Binding History}" Visibility="{Binding IsListBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="_history1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="{Binding ActualWidth, ElementName=listPanel}" >
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*" />
+                
+            </Grid.RowDefinitions>
+
+            <Button Command="{Binding AddCommand}" x:Name="addBut" Content="сложение" Grid.Column="0" Grid.Row="0"/>
+            <Button Command="{Binding SubtractCommand}" x:Name="subBut" Content="разность"  Grid.Column="1" Grid.Row="0"/>
+            <Button Command="{Binding MultiplyCommand}" x:Name="mulBut" Content="умножение"  Grid.Column="0" Grid.Row="1"/>
+            <Button Command="{Binding DivideCommand}" x:Name="divBut" Content="деление"  Grid.Column="1" Grid.Row="1"/>
+            
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto" x:Name="dadPanel">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+
+
+            <ListBox Grid.Column="0" ItemsSource="{Binding History}" Visibility="{Binding IsListBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="_history1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="150" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
 
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <TextBlock Text="{Binding}"/>
                                 <Button Background="Red" Content="X" Width="15" Height="15" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding}"/>
+                                
                             </StackPanel>
                            
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" Width="71" x:Name="testPanel" Height="94">
-                <Button Command="{Binding VisCommand}" x:Name="historyButton5" Content="История" Width="{Binding ActualWidth, ElementName=testPanel}"/>
-                <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Width="{Binding ActualWidth, ElementName=testPanel}" />
-                <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Width="{Binding ActualWidth, ElementName=testPanel}" />
-                <Button x:Name="localizationBut" Content="Eng"  Click="localizationBut_Click" Width="{Binding ActualWidth, ElementName=testPanel}"/>
-            </StackPanel>
-        </StackPanel>
+           
+            
+                <Button Command="{Binding VisCommand}" x:Name="historyButton5" Content="История" Width="70" Grid.Column="1" Grid.Row="0"/>
+            <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Width="70" Grid.Column="1" Grid.Row="1"/>
+            <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Width="70" Grid.Column="1" Grid.Row="2"/>
+            <Button x:Name="localizationBut" Content="Eng"  Click="localizationBut_Click" Width="70" Grid.Column="1" Grid.Row="3"/>
+            
+        </Grid>
     </Grid>
 
 </Window>

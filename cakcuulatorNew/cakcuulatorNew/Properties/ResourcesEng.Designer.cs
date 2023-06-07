@@ -70,7 +70,7 @@ namespace cakcuulatorNew.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на answer.
+        ///   Ищет локализованную строку, похожую на Result.
         /// </summary>
         internal static string s_answer {
             get {
@@ -88,7 +88,7 @@ namespace cakcuulatorNew.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на write num a.
+        ///   Ищет локализованную строку, похожую на First number.
         /// </summary>
         internal static string s_firstNum {
             get {
@@ -142,7 +142,7 @@ namespace cakcuulatorNew.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на write num b.
+        ///   Ищет локализованную строку, похожую на Second number.
         /// </summary>
         internal static string s_secondNum {
             get {
