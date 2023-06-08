@@ -57,7 +57,7 @@
 
     </Window.InputBindings>
 
-    <Grid VerticalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch" >
 
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
@@ -79,7 +79,7 @@
         </Grid.RowDefinitions>
 
 
-        <Grid Grid.Column="0" VerticalAlignment="Stretch" x:Name="dad" >
+        <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="5" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*" />
@@ -87,22 +87,22 @@
                 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.1*" />
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="firstNum" Grid.Row="0" Text="Введите а" />
 
 
-                <TextBlock x:Name="secondNum"  Grid.Row="1" Text="Введите b"  />
+            <TextBlock x:Name="secondNum"  Grid.Row="1" Text="Введите b"  />
 
-                <TextBlock x:Name="answer"  Grid.Row="2" Text="Ответ" />
+            <TextBlock x:Name="answer"  Grid.Row="2" Text="Ответ" />
             
             
-                <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" TextWrapping="Wrap" Width="150"/>
-            <utils:CustomTextBox Text="{Binding NumSecond, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" x:Name="TextBox22" Width="150" />
-            <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" TextWrapping="Wrap" IsReadOnly="True" Width="150"/>
+            <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" TextWrapping="Wrap" Width="140" TabIndex="1"/>
+            <utils:CustomTextBox Text="{Binding NumSecond, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" x:Name="TextBox22" Width="140" TabIndex="2" />
+            <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" TextWrapping="Wrap" IsReadOnly="True" Width="140" TabIndex="3"/>
             
 
 
@@ -110,16 +110,16 @@
         </Grid>
 
 
-        <Grid Grid.Column="2"  HorizontalAlignment="Stretch" >
+        <Grid Grid.Column="2"  HorizontalAlignment="Stretch" Margin="5">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*" />
-                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
 
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
                 
             </Grid.RowDefinitions>
 

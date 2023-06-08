@@ -70,6 +70,10 @@
     <Compile Include="utils\RelayCommand.cs" />
     <Compile Include="utils\RelayCommandTwoObj.cs" />
     <Compile Include="viewModel\ViewModel.cs" />
+    <Page Include="Dictionary_Localization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
