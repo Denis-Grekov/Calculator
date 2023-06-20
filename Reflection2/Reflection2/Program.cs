@@ -1,85 +1,81 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        Console.WriteLine("Введите путь до файла:");
+        Console.Write("Введите путь до файла: ");
         string filePath = Console.ReadLine();
 
-        if (File.Exists(filePath))
+        if (!File.Exists(filePath))
         {
-            string fileContent = File.ReadAllText(filePath);
-            string className = GetClassName(fileContent);
-            if (!string.IsNullOrEmpty(className))
+            Console.WriteLine("Файл не найден.");
+            return;
+        }
+
+        try
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            string className = null;
+            bool isInClass = false;
+
+            foreach (string line in lines)
             {
-                Console.WriteLine($"В файле \"{filePath}\" найден класс {className}.");
-                string classInfo = GetClassInfo(fileContent);
-                Console.WriteLine(classInfo);
+                if (line.Contains("class"))
+                {
+                    int startIndex = line.IndexOf("class") + 5;
+                    int endIndex = line.IndexOfAny(new char[] { ' ', ':' }, startIndex);
+
+                    if (endIndex == -1)
+                        endIndex = line.Length;
+
+                    className = line.Substring(startIndex, endIndex - startIndex);
+                    isInClass = true;
+                }
+                else if (isInClass && (line.Contains("public") || line.Contains("private") || line.Contains("protected") || line.Contains("internal")))
+                {
+                    string[] parts = line.Split(new char[] { ' ', ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (parts.Length >= 3)
+                    {
+                        string accessModifier = parts[0];
+                        string fieldType = parts[1];
+                        string fieldName = parts[2];
+
+                        Console.WriteLine($"{accessModifier} field {fieldName} {fieldType}");
+                    }
+                }
+                else if (isInClass && line.Contains("{ get;") && line.Contains("set;"))
+                {
+                    string[] parts = line.Split(new char[] { ' ', '{', '}', ';', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (parts.Length >= 3)
+                    {
+                        string accessModifier = parts[0];
+                        string propertyType = parts[1];
+                        string propertyName = parts[2];
+
+                        Console.WriteLine($"{accessModifier} property {propertyName} {propertyType} GetEnable SetEnable");
+                    }
+                }
+            }
+
+            if (!isInClass)
+            {
+                Console.WriteLine("В файле не найден класс.");
             }
             else
             {
-                Console.WriteLine("В указанном файле не найден класс.");
+                Console.WriteLine($"В файле \"{filePath}\" найден класс {className}.");
             }
         }
-        else
+        catch (Exception ex)
         {
-            Console.WriteLine("Указанный файл не существует.");
+            Console.WriteLine("Произошла ошибка при обработке файла:");
+            Console.WriteLine(ex.Message);
         }
 
         Console.ReadLine();
-    }
-
-    static string GetClassName(string fileContent)
-    {
-        Regex classRegex = new Regex(@"class\s+([\w\d_]+)\b");
-        Match match = classRegex.Match(fileContent);
-        if (match.Success)
-        {
-            return match.Groups[1].Value;
-        }
-        return null;
-    }
-
-    static string GetClassInfo(string fileContent)
-    {
-        Regex fieldRegex = new Regex(@"^\s*(public|private|protected)\s+(?!class)(\w+)\s+(\w+);", RegexOptions.Multiline);
-        Regex propertyRegex = new Regex(@"^\s*(public|private|protected)\s+(\w+)\s+(\w+)\s+{\s+(get;)?\s+(set;)?\s+}", RegexOptions.Multiline);
-
-        MatchCollection fieldMatches = fieldRegex.Matches(fileContent);
-        MatchCollection propertyMatches = propertyRegex.Matches(fileContent);
-
-        string classInfo = "";
-
-        foreach (Match match in fieldMatches)
-        {
-            string accessModifier = match.Groups[1].Value;
-            string fieldType = match.Groups[2].Value;
-            string fieldName = match.Groups[3].Value;
-            classInfo += $"{accessModifier} field {fieldName} {fieldType}\n";
-        }
-
-        foreach (Match match in propertyMatches)
-        {
-            string accessModifier = match.Groups[1].Value;
-            string propertyType = match.Groups[2].Value;
-            string propertyName = match.Groups[3].Value;
-            bool isGetEnabled = !string.IsNullOrEmpty(match.Groups[4].Value);
-            bool isSetEnabled = !string.IsNullOrEmpty(match.Groups[5].Value);
-
-            string accessString = isGetEnabled ? "GetEnable" : "GetDisable";
-            accessString += " ";
-
-            if (isSetEnabled)
-                accessString += isGetEnabled ? "SetEnable" : "SetDisable";
-            else
-                accessString += "SetDisable";
-
-            classInfo += $"{accessModifier} property {propertyName} {propertyType} {accessString}\n";
-        }
-
-        return classInfo;
     }
 }
