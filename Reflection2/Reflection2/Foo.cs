@@ -8,11 +8,14 @@ namespace Reflection2
 {
     class Foo
     {
-        public string TestString;
+        private char TestChar { get; }
 
-       public int TestNumber { get; set; }
-
-        private char TestChar { get; set; }
-
+        protected int testNumber2;
+        protected int TestNumber2
+        {
+            get { return testNumber2; }
+            set { testNumber2 = value; }
+        }
+        private char TestChar3;
     }
 }
