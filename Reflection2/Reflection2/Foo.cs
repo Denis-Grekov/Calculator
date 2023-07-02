@@ -17,5 +17,6 @@ namespace Reflection2
             set { testNumber2 = value; }
         }
         private char TestChar3;
+        public int a { get; set; }
     }
 }
