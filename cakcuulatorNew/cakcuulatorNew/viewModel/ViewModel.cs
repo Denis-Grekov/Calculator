@@ -12,6 +12,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+<<<<<<< HEAD
+=======
+using System.Windows.Controls;
+>>>>>>> calculator
 using System.Windows.Input;
 
 namespace cakcuulatorNew.viewModel
@@ -24,6 +28,11 @@ namespace cakcuulatorNew.viewModel
 
         private readonly ICalculatorModel _calculator;
         private readonly ObservableCollection<string> _history = new ObservableCollection<string>();
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> calculator
 
         public CalculatorViewModel()
         {
@@ -40,11 +49,18 @@ namespace cakcuulatorNew.viewModel
             get => _calculator.NumFirst;
             set
             {
+<<<<<<< HEAD
                 if (_doubleRegex.IsMatch(value.ToString()) || _intRegex.IsMatch(value.ToString()))
                 {
                     _calculator.NumFirst = value;
                     OnPropertyChanged(nameof(NumFirst));
                 }
+=======
+                
+                    _calculator.NumFirst = value;
+                    OnPropertyChanged(nameof(NumFirst));
+                
+>>>>>>> calculator
             }
         }
 
@@ -53,11 +69,18 @@ namespace cakcuulatorNew.viewModel
             get => _calculator.NumSecond;
             set
             {
+<<<<<<< HEAD
                 if (_doubleRegex.IsMatch(value.ToString()) || _intRegex.IsMatch(value.ToString()))
                 {
                     _calculator.NumSecond = value;
                     OnPropertyChanged(nameof(NumSecond));
                 }
+=======
+                
+                    _calculator.NumSecond = value;
+                    OnPropertyChanged(nameof(NumSecond));
+                
+>>>>>>> calculator
             }
         }
 
@@ -77,6 +100,7 @@ namespace cakcuulatorNew.viewModel
         public double? Result => _calculator.Result;
 
         public ObservableCollection<string> History => _history;
+<<<<<<< HEAD
 
         public void Add()
         {
@@ -89,10 +113,35 @@ namespace cakcuulatorNew.viewModel
                 string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
                 _history.Add(historyItem);
             }
+=======
+        public TextBox TextBox2 { get; set; }
+
+
+        
+        
+
+        public void Add()
+        {
+
+            _calculator.Add();
+            OnPropertyChanged(nameof(Result));
+            if (NumFirst != null && NumSecond != null)
+            {
+                string historyItem = $"{NumFirst} + {NumSecond} = {Result}";
+                _history.Add(historyItem);
+                
+            }
+            
+            NumFirst = Result;
+             NumSecond = null;
+            
+
+>>>>>>> calculator
         }
 
         public void Subtract()
         {
+<<<<<<< HEAD
             if (NumFirst.HasValue && NumSecond.HasValue)
             {
                 _calculator.Subtract();
@@ -102,10 +151,26 @@ namespace cakcuulatorNew.viewModel
                 string historyItem = $"{NumFirst} - {NumSecond} = {Result}";
                 _history.Add(historyItem);
             }
+=======
+            
+                _calculator.Subtract();
+
+               
+                OnPropertyChanged(nameof(Result));
+            if (NumFirst != null && NumSecond != null)
+            {
+                string historyItem = $"{NumFirst} - {NumSecond} = {Result}";
+                _history.Add(historyItem);
+                
+            }
+                NumFirst = Result;
+                NumSecond = null;
+>>>>>>> calculator
         }
 
         public void Multiply()
         {
+<<<<<<< HEAD
             if (NumFirst.HasValue && NumSecond.HasValue)
             {
                 _calculator.Multiply();
@@ -115,10 +180,26 @@ namespace cakcuulatorNew.viewModel
                 string historyItem = $"{NumFirst} * {NumSecond} = {Result}";
                 _history.Add(historyItem);
             }
+=======
+            
+                _calculator.Multiply();
+               
+                OnPropertyChanged(nameof(Result));
+                if (NumFirst != null && NumSecond != null)
+            {
+                string historyItem = $"{NumFirst} * {NumSecond} = {Result}";
+                _history.Add(historyItem);
+                
+            }
+                
+                NumFirst = Result;
+                NumSecond = null;
+>>>>>>> calculator
         }
 
         public void Divide()
         {
+<<<<<<< HEAD
             if (NumFirst.HasValue && NumSecond.HasValue)
             {
                 _calculator.Divide();
@@ -128,6 +209,20 @@ namespace cakcuulatorNew.viewModel
                 string historyItem = $"{NumFirst} / {NumSecond} = {Result}";
                 _history.Add(historyItem);
             }
+=======
+            
+                _calculator.Divide();
+                
+                OnPropertyChanged(nameof(Result));
+            if (NumFirst != null && NumSecond != null)
+            {
+                string historyItem = $"{NumFirst} / {NumSecond} = {Result}";
+                _history.Add(historyItem);
+                
+            }
+                NumFirst = Result;
+                NumSecond = null;
+>>>>>>> calculator
         }
 
         public System.Windows.Input.ICommand SaveHistoryCommand => new RelayCommand(async () =>
@@ -243,6 +338,7 @@ namespace cakcuulatorNew.viewModel
 
         public BoolToVisibilityConverter Converter { get; }
 
+<<<<<<< HEAD
         
 
 
@@ -252,6 +348,18 @@ namespace cakcuulatorNew.viewModel
             get { return new RelayCommand(Add); }
 
         }
+=======
+
+        
+
+        public System.Windows.Input.ICommand AddCommand
+        {
+            get { return new RelayCommand(Add); }
+
+        }
+        
+
+>>>>>>> calculator
 
         public System.Windows.Input.ICommand SubtractCommand
         {
@@ -266,9 +374,51 @@ namespace cakcuulatorNew.viewModel
         public System.Windows.Input.ICommand DivideCommand
         {
             get { return new RelayCommand(Divide); }
+<<<<<<< HEAD
         }
 
         
+=======
+
+        }
+
+        
+         private RelayCommandTwoObj removeCommand;
+        public RelayCommandTwoObj RemoveCommand
+        {
+            get
+            {
+                return removeCommand ??= new RelayCommandTwoObj(obj =>
+                {
+                    if (obj is string item)
+                    {
+                        if (_history.Contains(item))
+                        {
+                            _history.Remove(item);
+                        }
+                    }
+                });
+            }
+        }
+
+
+        private RelayCommandTwoObj focusCommand;
+        public RelayCommandTwoObj FocusCommand
+        {
+            get
+            {
+                return focusCommand ??= new RelayCommandTwoObj(obj =>
+                {
+                    if (obj is TextBox textBox)
+                    {
+                        textBox.Focus();
+                    }
+                });
+            }
+            
+        }
+
+>>>>>>> calculator
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -277,5 +427,12 @@ namespace cakcuulatorNew.viewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+<<<<<<< HEAD
+=======
+
+    
+
+
+>>>>>>> calculator
 }
 

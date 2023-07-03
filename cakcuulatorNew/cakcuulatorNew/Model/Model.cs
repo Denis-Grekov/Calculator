@@ -34,6 +34,10 @@ namespace cakcuulatorNew.Model
                 if (numSecond != value)
                 {
                     numSecond = value;
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> calculator
                 }
             }
         }

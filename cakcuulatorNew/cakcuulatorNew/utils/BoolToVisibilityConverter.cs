@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+<<<<<<< HEAD
+=======
+using System.Windows.Controls;
+>>>>>>> calculator
 using System.Windows.Data;
 
 namespace cakcuulatorNew.utils
@@ -26,4 +30,21 @@ namespace cakcuulatorNew.utils
             throw new NotImplementedException();
         }
     }
+<<<<<<< HEAD
+=======
+    public class CustomTextBox : TextBox
+    {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+        }
+
+        protected override void OnTextChanged(TextChangedEventArgs e)
+        {
+            base.OnTextChanged(e);
+
+            this.Focus();
+        }
+    }
+>>>>>>> calculator
 }

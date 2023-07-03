@@ -6,23 +6,84 @@
         xmlns:local="clr-namespace:cakcuulatorNew"
         xmlns:utils="clr-namespace:cakcuulatorNew.utils"
         mc:Ignorable="d"
+    
         Title="MainWindow" Height="450" Width="800" MinWidth="500" MinHeight="300">
     <Window.Resources>
         <utils:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+<<<<<<< HEAD
     </Window.Resources>
     <Grid>
+=======
+        <Style TargetType="Button" x:Key="DefaultButtonStyle">
+            <Setter Property="Width" Value="75" />
+            <Setter Property="VerticalAlignment" Value="Top"/>
+
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="DefaultTextBoxStyle">
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Width" Value="172"/>
+            <Setter Property="Height" Value="23"/>
+
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="utils:CustomTextBox" x:Key="DefaultTextBoxStyle2">
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Width" Value="175"/>
+            <Setter Property="Height" Value="23"/>
+
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="ListBox" x:Key="DefaultListBoxStyle">
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Width" Value="172"/>
+            <Setter Property="Height" Value="170"/>
+
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="DefaultTextBlockStyle">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding AddCommand}" Key="Add"/>
+        <KeyBinding Command="{Binding SubtractCommand}" Key="Subtract"/>
+        <KeyBinding Command="{Binding MultiplyCommand}" Key="Multiply"/>
+        <KeyBinding Command="{Binding DivideCommand}" Key="Divide"/>
+
+    </Window.InputBindings>
+
+    <Grid VerticalAlignment="Stretch" >
+
+        <Grid.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}"/>
+
+            <Style TargetType="utils:CustomTextBox" BasedOn="{StaticResource DefaultTextBoxStyle2}"/>
+            <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}"/>
+            <Style TargetType="ListBox" BasedOn="{StaticResource DefaultListBoxStyle}"/>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}"/>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="155*" />
+            <ColumnDefinition Width="161*"/>
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+>>>>>>> calculator
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-
+            <RowDefinition Height="auto" MinHeight="224"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
+<<<<<<< HEAD
         <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" HorizontalAlignment="Left" Height="23" Margin="80,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" PreviewKeyDown="TextBox1_PreviewKeyDown"  />
 
         <TextBlock x:Name="firstNum" Grid.Row="0" HorizontalAlignment="Left" Margin="5,5,0,0" TextWrapping="Wrap" Text="Введите а" VerticalAlignment="Top"/>
@@ -45,9 +106,96 @@
         <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Grid.Column="1" HorizontalAlignment="Left" Margin="120,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Grid.Column="1" HorizontalAlignment="Left" Margin="220,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="localizationBut" Content="Eng" HorizontalAlignment="Left" Margin="124,48,0,0" Grid.Row="3" VerticalAlignment="Top" Width="74" Click="localizationBut_Click"/>
+=======
+
+        <Grid Grid.Column="0" VerticalAlignment="Stretch" Margin="5" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="firstNum" Grid.Row="0" Text="Введите а" />
+
+
+            <TextBlock x:Name="secondNum"  Grid.Row="1" Text="Введите b"  />
+
+            <TextBlock x:Name="answer"  Grid.Row="2" Text="Ответ" />
+            
+            
+            <TextBox Text="{Binding NumFirst}" Grid.Row="0" x:Name="TextBox1" TextWrapping="Wrap" Width="140" TabIndex="1"/>
+            <utils:CustomTextBox Text="{Binding NumSecond, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" x:Name="TextBox22" Width="140" TabIndex="2" />
+            <TextBox Text="{Binding Result, Mode=OneWay}" Grid.Row="2" x:Name="TextBox3" TextWrapping="Wrap" IsReadOnly="True" Width="140" TabIndex="3"/>
+            
 
 
 
+        </Grid>
+>>>>>>> calculator
 
+
+        <Grid Grid.Column="2"  HorizontalAlignment="Stretch" Margin="5">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MaxHeight="150"/>
+                <RowDefinition Height="*" MaxHeight="150"/>
+                
+            </Grid.RowDefinitions>
+
+            <Button Command="{Binding AddCommand}" x:Name="addBut" Content="сложение" Grid.Column="0" Grid.Row="0"/>
+            <Button Command="{Binding SubtractCommand}" x:Name="subBut" Content="разность"  Grid.Column="1" Grid.Row="0"/>
+            <Button Command="{Binding MultiplyCommand}" x:Name="mulBut" Content="умножение"  Grid.Column="0" Grid.Row="1"/>
+            <Button Command="{Binding DivideCommand}" x:Name="divBut" Content="деление"  Grid.Column="1" Grid.Row="1"/>
+            
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto" x:Name="dadPanel">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.1*" />
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+
+
+            <ListBox Grid.Column="0" ItemsSource="{Binding History}" Visibility="{Binding IsListBoxVisible, Converter={StaticResource BoolToVisibilityConverter}}" x:Name="_history1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="150" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Background="Red" Content="X" Width="15" Height="15" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" CommandParameter="{Binding}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding}"/>
+                                
+                            </StackPanel>
+                           
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+           
+            
+                <Button Command="{Binding VisCommand}" x:Name="historyButton5" Content="История" Width="70" Grid.Column="1" Grid.Row="0"/>
+            <Button Command="{Binding SaveHistoryCommand}" x:Name="buttinSave" Content="Сохранить" Width="70" Grid.Column="1" Grid.Row="1"/>
+            <Button Command="{Binding LoadHistoryCommand}" x:Name="buttonLoad" Content="Зарузить" Width="70" Grid.Column="1" Grid.Row="2"/>
+            <Button x:Name="localizationBut" Content="Eng"  Click="localizationBut_Click" Width="70" Grid.Column="1" Grid.Row="3"/>
+            
+        </Grid>
     </Grid>
+
 </Window>

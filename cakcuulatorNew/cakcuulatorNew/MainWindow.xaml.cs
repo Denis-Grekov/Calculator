@@ -39,6 +39,7 @@ namespace cakcuulatorNew
         public MainWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
 
             _calculatorVM = new CalculatorViewModel();
             DataContext = _calculatorVM;
@@ -74,6 +75,13 @@ namespace cakcuulatorNew
                 e.Handled = true;
             }
         }
+=======
+
+            _calculatorVM = new CalculatorViewModel();
+            DataContext = _calculatorVM;
+        }
+
+>>>>>>> calculator
 
         private void localizationBut_Click(object sender, RoutedEventArgs e)
         {
@@ -120,6 +128,10 @@ namespace cakcuulatorNew
                 localizationBut.Content = cakcuulatorNew.Properties.ResourcesRu.s_localization;
             }
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> calculator
 
     }
 }

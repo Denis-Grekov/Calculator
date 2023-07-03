@@ -68,7 +68,16 @@
     </Compile>
     <Compile Include="utils\BoolToVisibilityConverter.cs" />
     <Compile Include="utils\RelayCommand.cs" />
+<<<<<<< HEAD
     <Compile Include="viewModel\ViewModel.cs" />
+=======
+    <Compile Include="utils\RelayCommandTwoObj.cs" />
+    <Compile Include="viewModel\ViewModel.cs" />
+    <Page Include="Dictionary_Localization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+>>>>>>> calculator
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

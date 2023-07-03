@@ -106,7 +106,11 @@ namespace cakcuulatorNew.Properties {
         }
         
         /// <summary>
+<<<<<<< HEAD
         ///   Ищет локализованную строку, похожую на Загрузка истории.
+=======
+        ///   Ищет локализованную строку, похожую на Загрузка.
+>>>>>>> calculator
         /// </summary>
         internal static string s_load {
             get {
@@ -133,7 +137,11 @@ namespace cakcuulatorNew.Properties {
         }
         
         /// <summary>
+<<<<<<< HEAD
         ///   Ищет локализованную строку, похожую на Сохранение истории.
+=======
+        ///   Ищет локализованную строку, похожую на Сохранение .
+>>>>>>> calculator
         /// </summary>
         internal static string s_save {
             get {

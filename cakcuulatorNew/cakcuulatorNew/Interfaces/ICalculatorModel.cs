@@ -15,5 +15,9 @@ namespace cakcuulatorNew.Interfaces
         void Subtract();
         void Multiply();
         void Divide();
+<<<<<<< HEAD
+=======
+
+>>>>>>> calculator
     }
 }
